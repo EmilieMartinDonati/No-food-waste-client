@@ -8,27 +8,27 @@ const AuthSignup = ({ role }) => {
     const [values, setValues] = useState({ name: "", email: "", password: "", role: role });
     console.log(values);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setValues((prevValues) => ({
-            ...prevValues,
-            [e.target.id]: e.target.value,
-        }));
-    };
+  const handleChange = (e) => {
+    setValues((prevValues) => ({
+      ...prevValues,
+      [e.target.id]: e.target.value,
+    }));
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        axios
-            .post("http://localhost:4000/signup", values)
-            .then((infos) => {
-                console.log("This is coming back from the server !", infos.data);
-                // navigate("/login", <AuthSignin role={role} />);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:4000/signup", values)
+      .then((infos) => {
+        console.log("This is coming back from the server !", infos.data);
+        // navigate("/login", <AuthSignin role={role} />);
+      })
+      .catch((error) => {
+        console.log("THIS IS THE ERROR", error);
+      });
+  };
 
     return (
         <>
