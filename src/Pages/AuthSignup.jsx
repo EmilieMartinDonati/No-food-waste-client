@@ -1,11 +1,12 @@
 // import FormInput from "../Components/FormInput";
 // import useForm from "../Hooks/useForm";
 import { useState } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink} from "react-router-dom";
 import axios from "axios";
 
 const AuthSignup = ({ role }) => {
-    const [values, setValues] = useState({ name: "", email: "", password: "", role });
+    const [values, setValues] = useState({ name: "", email: "", password: "", role: role });
+    console.log(values);
 
     const navigate = useNavigate();
 

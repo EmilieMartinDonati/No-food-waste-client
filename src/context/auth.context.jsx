@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import UserContext from "./UserContext";
+// import UserContext from "./UserContext";
 
 const AuthContext = React.createContext();
 
@@ -64,4 +64,4 @@ const AuthWrapper = ({ children }) => {
 	);
 };
 
-export default {AuthContext, AuthWrapper};
+export {AuthContext, AuthWrapper};
