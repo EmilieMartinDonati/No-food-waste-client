@@ -41,7 +41,7 @@ const AuthSignup = ({ role }) => {
             <input type="password" id="password" required/>
            <button><h5>SIGN UP</h5></button>
         </form>
-        <Navlink to="/login" role={role}><h3>Already registered ? Log in</h3></Navlink>
+        <NavLink to="/login" role={role}><h3>Already registered ? Log in</h3></NavLink>
         </>
     );
 };
