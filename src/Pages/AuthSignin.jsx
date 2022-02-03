@@ -26,7 +26,15 @@ const AuthSignin = ({role}) => {
 
 
     return (
-        <h1>FORM</h1>
+       <>
+        <form onSubmit={handleSubmit}>
+            <label htmlFor='email'>EMAIL</label>
+            <input type="text" name="email" required onChange={(e) => setEmail(e.target.value)}/>
+            <label htmlFor='password'>PASSWORD</label>
+            <input type="password" name="password" required onChange={(e) => setPassword(e.target.value)}/>
+           <button><h5>LOG IN</h5></button>
+        </form>
+        </>
     )
 }
 
