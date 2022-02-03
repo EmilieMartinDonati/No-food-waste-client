@@ -2,19 +2,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Creating a component that will be the first UI displayed to the user when launching the website
-const AuthRole = () => {
-  const [role, setRole] = useState("user");
+const AuthRole = ({ setRole }) => {
   const navigate = useNavigate();
 
   // Function to redirect the user to the signin page
   const handleUserSubmit = () => {
-    navigate("/login", role);
+    navigate("/signup");
   };
 
   // Function to redirect the user to the loginpage AFTER having changed its role to business
   const handleBusinessSubmit = () => {
     setRole("business");
-    navigate("/signin", role);
+    navigate("/signup");
   };
 
   // Return a simple DOM element with one header and two buttons to choose your role on the platform
