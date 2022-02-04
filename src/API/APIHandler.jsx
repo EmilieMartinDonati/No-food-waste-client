@@ -7,8 +7,8 @@ const service = axios.create({
 
 //! Error handling to use in the catch
 function errorHandler(error) {
-  if (error.response.data) {
-    console.log(error.response && error.response.data);
+  if (error.response?.data) {
+    console.log(error.response && error.response?.data);
     throw error;
   }
   throw error;
@@ -21,7 +21,9 @@ const apiHandler = {
   signup(userInfo) {
     return service
       .post("/api/auth/signup", userInfo)
-      .then((res) => res.data)
+      .then((res) => {
+        console.log(res);
+      })
       .catch(errorHandler);
   },
   isLoggedIn(token) {
