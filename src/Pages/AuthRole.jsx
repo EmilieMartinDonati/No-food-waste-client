@@ -7,6 +7,7 @@ const AuthRole = ({ setRole }) => {
 
   // Function to redirect the user to the signin page
   const handleUserSubmit = () => {
+    setRole("user");
     navigate("/signup");
   };
 

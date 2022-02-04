@@ -3,11 +3,11 @@ import { NavLink } from "react-router-dom";
 import useAuth from "./../context/UseAuth";
 
 const Navbar = () => {
-  const { loggedIn, currentUser } = useAuth;
+  const { isLoggedIn, currentUser } = useAuth();
 
   return (
     <nav>
-      {!loggedIn && (
+      {!isLoggedIn && (
         <>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/login">Log in</NavLink>
@@ -15,17 +15,14 @@ const Navbar = () => {
         </>
       )}
 
-      {loggedIn && currentUser.role === "user" && (
+      {isLoggedIn && (
         <>
           <NavLink to="/listings">Search</NavLink>
           <NavLink to="/favorites">Favorites</NavLink>
           <NavLink to="/account">My account</NavLink>
           <NavLink to="/logout">Log out</NavLink>
+          <NavLink to="/dashboard">Dashboard</NavLink>
         </>
-      )}
-
-      {loggedIn && currentUser.role === "business" && (
-        <NavLink to="/dashboard">Dashboard</NavLink>
       )}
     </nav>
   );
