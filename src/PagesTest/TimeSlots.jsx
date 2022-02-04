@@ -19,7 +19,7 @@ const TimeSlots = () => {
       
         while(startTime <= endTime){
           timeStops.push(new moment(startTime).format('HH:mm'));
-          startTime.add(15, 'minutes');
+          startTime.add(2, 'hours');
         }
         return timeStops;
       }
