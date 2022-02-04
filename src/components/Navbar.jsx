@@ -1,9 +1,15 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import useAuth from "./../context/UseAuth";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import useAuth from "../context/UseAuth";
 
 const Navbar = () => {
   const { isLoggedIn, currentUser, removeUser } = useAuth();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    removeUser();
+    navigate("/");
+  };
 
   return (
     <nav>
@@ -27,7 +33,7 @@ const Navbar = () => {
             <NavLink to="/dashboard">Dashboard</NavLink>
           )}
           <NavLink to="/account">My account</NavLink>
-          <button onClick={removeUser}>Log out</button>
+          <button onClick={handleClick}>Log out</button>
         </>
       )}
     </nav>
