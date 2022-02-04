@@ -6,6 +6,9 @@ import AuthRole from "./Pages/AuthRole";
 import AuthSignin from "./Pages/AuthSignin";
 import AuthSignup from "./Pages/AuthSignup";
 
+// Page Test pour le TimeSlot 
+import TimeSlots from "./PagesTest/TimeSlots";
+
 function App() {
   const [role, setRole] = useState("user");
 
@@ -18,6 +21,7 @@ function App() {
         <Route path="/" element={<AuthRole setRole={setRole} />} />
         <Route path="/signup" element={<AuthSignup role={role} />} />
         <Route path="/login" element={<AuthSignin role={role} />} />
+        <Route path="/testTimeSlot" element={<TimeSlots />} />
       </Routes>
     </div>
   );

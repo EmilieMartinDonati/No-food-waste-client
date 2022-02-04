@@ -15,15 +15,17 @@ const AuthSignup = ({ role }) => {
       ...prevValues,
       [e.target.id]: e.target.value,
     }));
+    console.log("after the handleChange", values);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("during the handleSubmit", values);
     axios
       .post("http://localhost:4000/signup", values)
       .then((infos) => {
         console.log("This is coming back from the server !", infos.data);
-        // navigate("/login", <AuthSignin role={role} />);
+        navigate("/login");
       })
       .catch((error) => {
         console.log("THIS IS THE ERROR", error);
