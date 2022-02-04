@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Onboarding from "./Onboarding";
-import ListOfBusiness from "./ListOfBusiness";
-import useAuth from "./../context/UseAuth";
+import ListingsList from "./ListingsList";
 import axios from "axios";
+import useAuth from "../../context/UseAuth";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
@@ -14,7 +14,7 @@ const Dashboard = () => {
       .then((allBusinesses) => {
         allBusinesses.find((business) => business.owner === currentUser._id);
       })
-      .then((foundBusinesses) => setBusinessOfCurrentUser(foundBusinesses))
+      .then((foundBusiness) => setBusinessOfCurrentUser(foundBusiness))
       .catch((err) => console.error(err));
   }, []);
 
@@ -22,7 +22,7 @@ const Dashboard = () => {
     <div>
       {!businessOfCurrentUser && <Onboarding />}
       {businessOfCurrentUser && (
-        <ListOfBusiness business={businessOfCurrentUser} />
+        <ListingsList business={businessOfCurrentUser} />
       )}
     </div>
   );

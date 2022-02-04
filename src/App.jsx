@@ -5,7 +5,9 @@ import { Routes, Route } from "react-router-dom";
 import AuthRole from "./Pages/AuthRole";
 import AuthSignin from "./Pages/AuthSignin";
 import AuthSignup from "./Pages/AuthSignup";
-import Onboarding from "./Pages/Dashboard/Onboarding";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import Discover from "./Pages/Discover/Discover";
+import PrivateRoute from "./components/PrivateRoute";
 
 // Page Test pour le TimeSlot
 import TimeSlots from "./PagesTest/TimeSlots";
@@ -23,7 +25,10 @@ function App() {
         <Route path="/signup" element={<AuthSignup role={role} />} />
         <Route path="/login" element={<AuthSignin role={role} />} />
         <Route path="/testTimeSlot" element={<TimeSlots />} />
-        <Route path="/dashboard" element={<Onboarding />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/discover" element={<Discover />} />
+        </Route>
       </Routes>
     </div>
   );

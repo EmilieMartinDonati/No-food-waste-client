@@ -9,7 +9,9 @@ const AuthSignin = ({ role }) => {
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useAuth();
+  const { storeToken, authenticateUser, currentUser } = useAuth();
+
+  console.log("This is current user", currentUser);
 
   const handleSubmit = (e) => {
     const data = {
@@ -24,8 +26,10 @@ const AuthSignin = ({ role }) => {
       .then((res) => {
         storeToken(res.authToken);
         authenticateUser();
-        console.log("this is the role and res", role, res);
-        role === "user" ? navigate("/discover") : navigate("/dashboard");
+        // role === "user" ? navigate("/discover") : navigate("/dashboard");
+        currentUser.role === "user"
+          ? navigate("/discover")
+          : navigate("/dashboard");
       })
       .catch((e) => console.log(e));
   };
