@@ -19,6 +19,7 @@ const UserProvider = ({ children }) => {
       apiHandler
         .isLoggedIn(storedToken)
         .then((user) => {
+          console.log(user);
           setAuth({ currentUser: user, isLoading: false, isLoggedIn: true });
         })
         .catch((e) => {

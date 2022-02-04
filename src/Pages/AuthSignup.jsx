@@ -32,7 +32,7 @@ const AuthSignup = ({ role }) => {
       // axios
       //   .post("http://localhost:4000/api/auth/signup", values)
       .then((infos) => {
-        console.log("This is coming back from the server !", infos.data);
+        console.log("This is coming back from the server !", infos);
         navigate("/login");
       })
       .catch((error) => {

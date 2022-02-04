@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, Navigate, NavLink } from "react-router-dom";
 import apiHandler from "./../API/APIHandler";
 import useAuth from "./../context/UseAuth";
 
@@ -26,12 +26,14 @@ const AuthSignin = ({ role }) => {
       .then((res) => {
         storeToken(res.authToken);
         authenticateUser();
+        console.log("resp from db", res.authToken, res.role)
         // role === "user" ? navigate("/discover") : navigate("/dashboard");
-        currentUser.role === "user"
+        res.role === "user"
           ? navigate("/discover")
           : navigate("/dashboard");
+        
       })
-      .catch((e) => console.log(err));
+      .catch((e) => console.log(e));
   };
 
   return (
