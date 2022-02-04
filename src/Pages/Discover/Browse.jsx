@@ -4,7 +4,7 @@ import ListingCard from "../../components/ListingCard";
 // import { geolocated } from "react-geolocated";
 import {NavLink} from "react-router-dom";
 
-const Discover = () => {
+const Browse = () => {
 
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
@@ -32,7 +32,7 @@ const Discover = () => {
 
   return (
     <div>
-      <h1>This is the Discover home page</h1>
+      <h1>This is the Browse page</h1>
       <h4>User's current position :</h4>
       <p>Latitude : {latitude}</p>
       <p>Longitude : {longitude} </p>
@@ -40,14 +40,14 @@ const Discover = () => {
         width: "100%",
         height: "400px"
       }}></div> */}
-      <h4>Our approach</h4>
-      <p>No food waste is a company which aims at reducing food waste and its environmental impact by giving you the opportunity to buy yummy meals from the unsold stocks or nearby restaurant owners</p>
-      <NavLink to="/listings"><h4>Browse through all available meals</h4></NavLink>
-
+      <h4>Map</h4>
+      <h4>List</h4>
+    
       {listings.map((listing) => {
         return (
           <div key={listing._id}>
           <ListingCard listing={listing} />
+          <NavLink to={`/listing/${listing._id}`}><h4>Browse through all available meals</h4></NavLink>
           </div>
         )
       })}
@@ -55,4 +55,4 @@ const Discover = () => {
   );
 };
 
-export default Discover;
+export default Browse;
