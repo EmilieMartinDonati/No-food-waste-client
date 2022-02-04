@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
-import axios from "axios";
+import apiHandler from "./../API/APIHandler";
+import useAuth from "./../context/UseAuth";
 
 const AuthSignin = ({ role }) => {
   const [email, setEmail] = useState("");
@@ -8,17 +9,21 @@ const AuthSignin = ({ role }) => {
 
   const navigate = useNavigate();
 
+  const { storeToken, authenticateUser } = useAuth();
+
   const handleSubmit = (e) => {
     const data = {
       email: email,
       password: password,
     };
 
+    console.log("data in AuthSignin line 20", data);
     e.preventDefault();
-    axios
-      .post("http://localhost:4000/signin", data)
-      .then((dbRes) => {
-        console.log("THIS DATA RETURNED FROM SIGNIN", dbRes.data);
+    apiHandler
+      .signin(data)
+      .then((res) => {
+        storeToken(res.authToken);
+        authenticateUser();
         role === "user" ? navigate("/discover") : navigate("/dashboard");
       })
       .catch((e) => console.log(err));
