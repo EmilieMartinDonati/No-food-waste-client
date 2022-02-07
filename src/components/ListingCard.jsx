@@ -12,9 +12,10 @@ const ListingCard = ({ listing }) => {
       <img className="card-img-top" src={listing.owner.picture} alt={listing.name} />
       <div className="card-body">
         <h5 className="card-title">{listing.name}</h5>
+        <h5 className="card-text">Price: {listing.price}€</h5>
         <p className="card-text">{listing.owner.name}</p>
         <p className="card-text">Pick up by {listing.owner.pickupTimeSlots}</p>
-        <p className="card-text">Price: {listing.price}€</p>
+        <p>{listing.availableQuantity}</p>
         <Link to={`/listing/${listing._id}`}>See this offer</Link>
       </div>
     </div>
