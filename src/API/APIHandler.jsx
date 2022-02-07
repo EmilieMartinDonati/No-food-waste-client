@@ -29,7 +29,7 @@ const apiHandler = {
   isLoggedIn(token) {
     return service
       .get("/api/auth/me", {
-        headers: { Authorization: `Bearer ${token}` },
+        // headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => res.data)
       .catch(errorHandler);
