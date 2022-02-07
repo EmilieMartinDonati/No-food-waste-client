@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 const DescribeYourBusiness = ({ setBusiness, setStep }) => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [description, setDescription] = useState("");
+  const [picture, setPicture] = useState("");
+  const imageRef = useRef(null);
 
   const handleClick = () => {
+    setPicture(imageRef.current.files[0]);
+
     setBusiness((prevValues) => {
-      return { ...prevValues, name, address, phone, description };
+      return { ...prevValues, name, address, phone, description, picture };
     });
     setStep(2);
   };
@@ -56,7 +60,7 @@ const DescribeYourBusiness = ({ setBusiness, setStep }) => {
         it will help users differentiating your listings with others.
       </p>
 
-      <input type="file" name="picture" />
+      <input ref={imageRef} type="file" name="picture" />
 
       <button onClick={handleClick}>Register</button>
     </div>

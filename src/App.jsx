@@ -27,13 +27,13 @@ function App() {
         <Route path="/signup" element={<AuthSignup role={role} />} />
         <Route path="/login" element={<AuthSignin role={role} />} />
         <Route path="/testTimeSlot" element={<TimeSlots />} />
-        <Route path="/welcome" element={<Welcome role={role}/>} />
+        <Route path="/welcome" element={<Welcome />} />
         <Route element={<PrivateRoute />}>
-           <Route path="/discover" element={<Discover />} />
+          <Route path="/discover" element={<Discover />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
         <Route path="/listings" element={<Browse />} />
-        <Route path="/listing/:id" element={<ListingDetails/>} />
+        <Route path="/listing/:id" element={<ListingDetails />} />
       </Routes>
     </div>
   );

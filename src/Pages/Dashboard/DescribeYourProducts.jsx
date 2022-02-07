@@ -4,9 +4,14 @@ const DescribeYourProducts = ({ setBusiness, setStep }) => {
   const [tags, setTags] = useState([]);
 
   const handleChange = (evt) => {
-    const options = evt.target.options;
-    setTags(Array.of(options).filter((option) => option.selected === true));
-    console.log(tags);
+    const newTags = [];
+    const options = evt.target.selectedOptions;
+    options.forEach((option) => newTags.push(option));
+    setTags(newTags);
+    // ---> console.log("options selected", evt.target.selectedOptions.(forEach el => el.value)
+    // console.log("options", options);
+    // setTags(Array.of(options).filter((option) => option.selected === true));
+    // console.log(tags);
   };
 
   const handleClick = (evt) => {
@@ -18,7 +23,7 @@ const DescribeYourProducts = ({ setBusiness, setStep }) => {
   };
 
   return (
-    <form onSelect={(evt) => handleChange(evt)}>
+    <form>
       <h2>Describe the products you sell</h2>
       <p>
         Tell us what kind of products you will be selling. This information will
@@ -30,6 +35,7 @@ const DescribeYourProducts = ({ setBusiness, setStep }) => {
         type="text"
         name="tags"
         placeholder="Select all relevant tags"
+        onChange={(evt) => handleChange(evt)}
         multiple
       >
         <option value="japonais">japonais</option>
@@ -37,6 +43,8 @@ const DescribeYourProducts = ({ setBusiness, setStep }) => {
         <option value="thaï">thaï</option>
         <option value="vegan">vegan</option>
         <option value="boulangerie">Boulangerie</option>
+        <option value="italien">Italien</option>
+        <option value="gastronomique">Gastronomique</option>
       </select>
 
       <button onClick={(evt) => handleClick(evt)}>Ok</button>
