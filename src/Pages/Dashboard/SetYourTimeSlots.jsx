@@ -1,20 +1,22 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import apiHandler from "../../API/APIHandler";
 
 const SetYourTimeSlots = ({ business }) => {
   const [startTimeSlot, setStartTimeSlot] = useState(null);
   const [endTimeSlot, setEndTimeSlot] = useState(null);
+  const navigate = useNavigate();
 
   const handleStartTimeChange = (evt) => {
     console.log("start time", evt.target.value);
     console.log("start time typeof", typeof evt.target.value);
-    // setStartTimeSlot(evt.target.value);
+    setStartTimeSlot(new Date(evt.target.value));
   };
 
   const handleEndTimeChange = (evt) => {
     console.log("end time", evt.target.value);
     console.log("end time typeof", typeof evt.target.value);
-    // setEndTimeSlot(evt.target.value);
+    setEndTimeSlot(new Date(evt.target.value));
   };
 
   const handleClick = (evt) => {
@@ -31,17 +33,17 @@ const SetYourTimeSlots = ({ business }) => {
     formData.append("startTimeSlot", startTimeSlot);
     formData.append("endTimeSlot", endTimeSlot);
 
-    axios
-      .post("http://localhost:4000/api/business/create", formData)
-      .then((dbRes) => {
-        console.log(dbRes);
-        // navigate("/dashboard");
+    apiHandler
+      .post("/api/business/create", formData)
+      .then(() => {
+        console.log("Hey, do you arrive here??????");
+        navigate("/dashboard");
       })
       .catch((err) => console.error(err));
   };
 
   return (
-    <form>
+    <form className="p-4">
       <h2>At what time can users pick up their order?</h2>
       <p>
         Set your timeslots below for pickup. Note that the majority of our
@@ -50,6 +52,7 @@ const SetYourTimeSlots = ({ business }) => {
 
       <label htmlFor="startTime"></label>
       <input
+        className="m-3"
         type="datetime-local"
         id="startTime"
         onChange={(evt) => handleStartTimeChange(evt)}
@@ -57,12 +60,15 @@ const SetYourTimeSlots = ({ business }) => {
 
       <label htmlFor="endTime"></label>
       <input
+        className="m-3"
         type="datetime-local"
         id="endTime"
         onChange={(evt) => handleEndTimeChange(evt)}
       />
 
-      <button onClick={(evt) => handleClick(evt)}>Register timeslots</button>
+      <button className="btn btn-primary" onClick={(evt) => handleClick(evt)}>
+        Register timeslots
+      </button>
     </form>
   );
 };

@@ -10,7 +10,8 @@ import Discover from "./Pages/Discover/Discover";
 import PrivateRoute from "./components/PrivateRoute";
 import Browse from "./Pages/Discover/Browse";
 import ListingDetails from "./Pages/Discover/ListingDetails";
-import Welcome from "./Pages/Welcome";
+import Onboarding from "./Pages/Dashboard/Onboarding";
+import CreateListing from "./Pages/Listing-CRUD/CreateListing";
 
 // Page Test pour le TimeSlot
 import TimeSlots from "./PagesTest/TimeSlots";
@@ -27,10 +28,11 @@ function App() {
         <Route path="/signup" element={<AuthSignup role={role} />} />
         <Route path="/login" element={<AuthSignin role={role} />} />
         <Route path="/testTimeSlot" element={<TimeSlots />} />
-        <Route path="/welcome" element={<Welcome />} />
         <Route element={<PrivateRoute />}>
           <Route path="/discover" element={<Discover />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/listings/create" element={<CreateListing />} />
         </Route>
         <Route path="/listings" element={<Browse />} />
         <Route path="/listing/:id" element={<ListingDetails />} />
