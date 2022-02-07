@@ -3,22 +3,34 @@ import apiHandler from "../../api/apiHandler";
 import ListingCard from "../../components/ListingCard";
 import { NavLink } from "react-router-dom";
 import Geocode from "react-geocode";
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
 Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
 Geocode.setLanguage("fr");
 
 const Browse = () => {
 
+  const [latitudeUser, setLatitudeUser] = useState(0);
+  const [longitudeUser, setLongitudeUser] = useState(0);
+  const [listings, setListings] = useState([]);
+  const [userAddress, setUserAddress] = useState("");
+  const [mapOrList, setMapOrList] = useState("list");
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
-  const [listings, setListings] = useState([]);
-  const [address, setAddress] = useState("");
-  const [mapOrList, setMapOrList] = useState("list");
-  const [location, setLocation] = useState(0, 0);
+
+
+  const containerStyle = {
+    width: '300px',
+    height: '300px',
+    marginLeft: "3%",
+  };
+
+
+
 
   // The code below is a parser that should work for adresses for most countries. 
   // We can find where the current user is this wayyy !
-  Geocode.fromLatLng(latitude, longitude).then(
+  Geocode.fromLatLng(latitudeUser, longitudeUser).then(
     (response) => {
       const address = response.results[0].formatted_address;
       let city, state, country;
@@ -37,8 +49,8 @@ const Browse = () => {
           }
         }
       }
-      console.log(city, state, country);
-      setAddress(address);
+      // console.log(city, state, country);
+      setUserAddress(address);
     },
     (error) => {
       console.error(error);
@@ -46,18 +58,8 @@ const Browse = () => {
   );
 
 
-  // The code below is to do the reverse (geolocation from address) -> this way we can retrieve the maps from the businesses location.
-Geocode.fromAddress("19 rue Eugène Jumin, 55019 Paris").then(
-  (response) => {
-    const { lat, lng } = response.results[0].geometry.location;
-    setLocation(lat, lng);
-  },
-  (error) => {
-    console.error(error);
-  }
-);
-
   useEffect(() => {
+
     if ("geolocation" in navigator) {
       console.log("Available");
     } else {
@@ -65,18 +67,56 @@ Geocode.fromAddress("19 rue Eugène Jumin, 55019 Paris").then(
     }
     navigator.geolocation.getCurrentPosition(function (position) {
       console.log("Latitude is :", position.coords.latitude);
-      setLatitude(position.coords.latitude);
+      setLatitudeUser(position.coords.latitude);
       console.log("Longitude is :", position.coords.longitude);
-      setLongitude(position.coords.longitude);
+      setLongitudeUser(position.coords.longitude);
     });
     apiHandler.get("/discover").then((res) => {
       console.log(res.data);
       setListings(res.data);
-      console.log(listings)
+      console.log(listings);
     }
     )
-      .catch((e) => console.log(e))
+      .catch((e) => console.log(e));
   }, [])
+
+
+  useEffect(() => {
+    initLocalisations()
+  }, [listings])
+
+  //console.log("listing after init", listing);
+
+  const fetchGeocode = (listing) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let address = listing.owner.address;
+        const APIres = await Geocode.fromAddress(address);
+        const { lat, lng } = APIres.results[0].geometry.location;
+        console.log("lat long", lat, lng);
+        resolve({ lat, lng });
+      }
+      catch (e) { reject(e) }
+    })
+  }
+
+  const initLocalisations = async () => {
+    console.log("waht is in listings ?", listings)
+    try {
+      for (let listing of listings) {
+        //console.log(!!listing, listing)
+        const res = await fetchGeocode(listing);
+        console.log(">>", res);
+        listing.coord = res;
+        console.log("this is the listing with the coordinates", listing);
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  console.log("listings, I hope they have the coordinates", listings);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -90,8 +130,23 @@ Geocode.fromAddress("19 rue Eugène Jumin, 55019 Paris").then(
     <div className="container">
       <div className="row">
         <div className="col-12">
-          <h1 className="text-center text-danger">Discover</h1>
-          <p>Offers near <span style={{ color: "slategrey" }}>{address}</span></p>
+          <h1 className="text-center text-danger">BROWSE</h1>
+          <p>Offers near <span style={{ color: "slategrey" }}>{userAddress}</span></p>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-12">
+          <form action="/" method="get">
+            <label htmlFor="search">
+            </label>
+            <input
+              type="text"
+              id="search"
+              placeholder="Search by categories"
+            />
+            <button type="submit">Search</button>
+          </form>
         </div>
       </div>
 
@@ -119,7 +174,7 @@ Geocode.fromAddress("19 rue Eugène Jumin, 55019 Paris").then(
         <div className="col-6 d-flex-column justify-content-center">
 
           {listings.map((listing) => {
-            console.log("this is the log of the listing", listing._id);
+            {/* console.log("this is the log of the listing", listing._id); */ }
             return (
               <div key={listing._id}>
                 <ListingCard listing={listing} />
@@ -128,12 +183,42 @@ Geocode.fromAddress("19 rue Eugène Jumin, 55019 Paris").then(
             )
           })
           }
-        
+
         </div>
 
-        <div className="col-6 d-flex-column justify-content-center">
 
-        
+        <div className="col-6 d-flex-column justify-content-center">
+          <p className="text-uppercase">See on card</p>
+          {listings.map((listing) => {
+            console.log("gimme the damn coord :'(", listing)
+            const center = {
+              lat: listing.coord?.lat,
+              lng: listing.coord?.lng,
+            }
+            return (
+              <>
+                <h4>{listing.name}</h4>
+                <p>{listing.owner.address}</p>
+                <p>{listing.coord?.lat}</p>
+                <p>{listing.coord?.lng}</p>
+                <LoadScript
+                  googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk"
+                >
+                  <GoogleMap
+                    mapContainerStyle={containerStyle}
+                    center={center}
+                    zoom={20}
+                  >
+                  </GoogleMap>
+                </LoadScript>
+              </>
+            )
+          })
+          }
+
+
+
+
         </div>
       </div>
     </div>
