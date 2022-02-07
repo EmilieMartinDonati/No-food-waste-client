@@ -25,9 +25,7 @@ const Onboarding = () => {
       {step === 2 && (
         <DescribeYourProducts setBusiness={setBusiness} setStep={setStep} />
       )}
-      {step === 3 && (
-        <SetYourTimeSlots setBusiness={setBusiness} business={business} />
-      )}
+      {step === 3 && <SetYourTimeSlots business={business} />}
     </div>
   );
 };

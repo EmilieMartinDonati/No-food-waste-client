@@ -1,34 +1,38 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const SetYourTimeSlots = ({ setBusiness, business }) => {
-  const [timeSlots, setTimeSlots] = useState([]);
+const SetYourTimeSlots = ({ business }) => {
+  const [startTimeSlot, setStartTimeSlot] = useState(null);
+  const [endTimeSlot, setEndTimeSlot] = useState(null);
 
   const handleStartTimeChange = (evt) => {
-    const copy = [...timeSlots];
-    copy.shift();
-    copy.unshift(evt.target.value);
-    setTimeSlots(copy);
+    console.log("start time", evt.target.value);
+    console.log("start time typeof", typeof evt.target.value);
+    // setStartTimeSlot(evt.target.value);
   };
 
   const handleEndTimeChange = (evt) => {
-    const copy = [...timeSlots];
-    copy.pop();
-    copy.push(evt.target.value);
-    setTimeSlots(copy);
+    console.log("end time", evt.target.value);
+    console.log("end time typeof", typeof evt.target.value);
+    // setEndTimeSlot(evt.target.value);
   };
 
   const handleClick = (evt) => {
     evt.preventDefault();
 
-    setBusiness((prevValues) => {
-      return { ...prevValues, timeSlots };
-    });
+    const formData = new FormData();
 
-    console.log(business);
+    formData.append("name", business.name);
+    formData.append("address", business.address);
+    formData.append("phone", business.phone);
+    formData.append("description", business.description);
+    formData.append("picture", business.picture);
+    formData.append("tags", business.tags);
+    formData.append("startTimeSlot", startTimeSlot);
+    formData.append("endTimeSlot", endTimeSlot);
 
     axios
-      .post("http://localhost:4000/api/business/create", business)
+      .post("http://localhost:4000/api/business/create", formData)
       .then((dbRes) => {
         console.log(dbRes);
         // navigate("/dashboard");
