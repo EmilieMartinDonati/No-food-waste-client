@@ -5,6 +5,12 @@ const service = axios.create({
   withCredentials: true,
 });
 
+service.interceptors.request.use((config) => {
+  const token = localStorage.getItem("authToken");
+  config.headers.Authorization = token ? `Bearer ${token}` : "";
+  return config;
+});
+
 //! Error handling to use in the catch
 function errorHandler(error) {
   if (error.response?.data) {
@@ -29,7 +35,7 @@ const apiHandler = {
   isLoggedIn(token) {
     return service
       .get("/api/auth/me", {
-        // headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => res.data)
       .catch(errorHandler);
