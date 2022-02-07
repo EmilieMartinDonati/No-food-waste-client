@@ -4,10 +4,14 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {
   const { isLoggedIn, currentUser } = useAuth();
+  // I've added this just to try : 
+  const storedToken = localStorage.getItem("authToken");
 
   // console.log(currentUser.role);
 
-  if (!isLoggedIn) {
+  // if (!isLoggedIn)
+
+  if (!storedToken) {
     console.log("Hello I'm in private route live 11");
     return <Navigate to="/login" />;
   } else return <Outlet />;
