@@ -28,8 +28,7 @@ const AuthSignin = ({ role }) => {
         authenticateUser();
         // navigate("/welcome");
         // role === "user" ? navigate("/discover") : navigate("/dashboard");
-
-        res.role === "user" ? navigate("/discover") : navigate("/dashboard");
+        currentUser.role === "user" ? navigate("/discover") : navigate("/dashboard");
       })
       .catch((e) => console.log(e));
   };

@@ -10,6 +10,9 @@ import Discover from "./Pages/Discover/Discover";
 import PrivateRoute from "./components/PrivateRoute";
 import Browse from "./Pages/Discover/Browse";
 import ListingDetails from "./Pages/Discover/ListingDetails";
+import Account from "./Pages/Account/Account";
+import Bookings from "./Pages/Account/Bookings";
+import OneBooking from "./Pages/Account/OneBooking";
 // import Welcome from "./Pages/Welcome";
 
 // Page Test pour le TimeSlot
@@ -34,6 +37,10 @@ function App() {
         </Route>
         <Route path="/listings" element={<Browse />} />
         <Route path="/listing/:id" element={<ListingDetails />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/account/bookings/" element={<Bookings />} />
+        <Route path="/account/bookings/:id" element={<OneBooking />} />
+        
       </Routes>
     </div>
   );
