@@ -1,28 +1,30 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import ListingCard from "../../components/ListingCard";
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import Geocode from "react-geocode";
 
 Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
 Geocode.setLanguage("fr");
 
 const Discover = () => {
-
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   const [allListings, setAllListings] = useState([]);
-  const [address, setAddress] = useState("")
+  const [address, setAddress] = useState("");
 
-
-  // The code below is a parser that should work for adresses for most countries. 
+  // The code below is a parser that should work for adresses for most countries.
   // We can find where the current user is this wayyy !
   Geocode.fromLatLng(latitude, longitude).then(
     (response) => {
       const address = response.results[0].formatted_address;
       let city, state, country;
       for (let i = 0; i < response.results[0].address_components.length; i++) {
-        for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
+        for (
+          let j = 0;
+          j < response.results[0].address_components[i].types.length;
+          j++
+        ) {
           switch (response.results[0].address_components[i].types[j]) {
             case "locality":
               city = response.results[0].address_components[i].long_name;
@@ -44,10 +46,9 @@ const Discover = () => {
     }
   );
 
-
   const containerStyle = {
-    width: 'auto',
-    height: '400px',
+    width: "auto",
+    height: "400px",
   };
 
   const center = {
@@ -62,7 +63,6 @@ const Discover = () => {
 
   // const [map, setMap] = useState(null);
 
-
   //   const onLoad = useCallback(function callback(map) {
   //     let isMounted = true;
   //     if (isMounted) {
@@ -76,9 +76,6 @@ const Discover = () => {
   //   const onUnmount = useCallback(function callback(map) {
   //     setMap(null)
   //   }, [])
-
-
-
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -102,7 +99,9 @@ const Discover = () => {
         })
         .catch((err) => console.error(err));
     }
-    return () => { isMounted = false };
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -118,48 +117,47 @@ const Discover = () => {
       >
       </GoogleMap>):  */}
 
-
       <div className="container">
         <div className="row">
           <div className="col-4">
             <h1 className="text-center text-danger">Discover</h1>
-            <p>Offers near <span style={{color: "slategrey"}}>{address}</span></p>
+            <p>
+              Offers near <span style={{ color: "slategrey" }}>{address}</span>
+            </p>
           </div>
           <div className="col-8">
-            <LoadScript
-              googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk"
-            >
+            <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
               <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
                 zoom={10}
-              >
-              </GoogleMap>
+              ></GoogleMap>
             </LoadScript>
           </div>
         </div>
-      <div className="row">
+        <div className="row">
+          <div className="col-12 d-inline-flex">
 
-        <div className="col-12 d-inline-flex">
-          {allListings.map((listing) => {
-            return <ListingCard listing={listing} />;
-          })}
+            {allListings.length > 0 && 
+              
+              allListings.map((listing) => {
+              return <ListingCard listing={listing} />;
+            })}
+          </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col-12">
-          <h1 className="text-center text-danger">
-            Our approach
-          </h1>
-          <p>No-food-waste is an ecofriendly society that allows restaurant owners to sell their unsold stocks to you under the form of of nicely packaged meals.</p>
+        <div className="row">
+          <div className="col-12">
+            <h1 className="text-center text-danger">Our approach</h1>
+            <p>
+              No-food-waste is an ecofriendly society that allows restaurant
+              owners to sell their unsold stocks to you under the form of of
+              nicely packaged meals.
+            </p>
+          </div>
         </div>
       </div>
     </div>
-
-
-</div>
   );
 };
 
 export default Discover;
-
