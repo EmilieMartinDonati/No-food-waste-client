@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartFull } from "@fortawesome/free-solid-svg-icons";
 
 const ListingCard = ({ listing }) => {
   // !!!!
@@ -14,9 +17,14 @@ const ListingCard = ({ listing }) => {
         <h5 className="card-title">{listing.name}</h5>
         <h5 className="card-text">Price: {listing.price}€</h5>
         <p className="card-text">{listing.owner.name}</p>
+        <FontAwesomeIcon
+          icon={faHeartFull}
+          size="xs"
+        />
         <p className="card-text">Pick up by {listing.owner.pickupTimeSlots}</p>
         <p>{listing.availableQuantity}</p>
         <Link to={`/listing/${listing._id}`}>See this offer</Link>
+
       </div>
     </div>
 

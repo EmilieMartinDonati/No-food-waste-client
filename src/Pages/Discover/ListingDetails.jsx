@@ -72,10 +72,10 @@ const ListingDetails = () => {
                 <div className="card card-body">
                     <form onSubmit={submitHandler}>
                     <label htmlFor="label" className="card-title">Quantity</label>
-                    <input type="number" min="1" max={listing.availableQuantity} onChange={(e) => setQuantity(e.target.value)}/>
+                    <input type="number" id="label" min="1" max={listing.availableQuantity} onChange={(e) => setQuantity(e.target.value)}/>
 
-                    <label htmlFor>PAYMENT</label>
-                    <select onChange={(e) => setPayment(e.target.value)}>
+                    <label htmlFor="payment">PAYMENT</label>
+                    <select id="payment" onChange={(e) => setPayment(e.target.value)}>
                         <option id="VISA">VISA</option>
                         <option id="MASTERCARD">MASTERCARD</option>
                         <option id="PAYPAL">PAYPAL</option>
