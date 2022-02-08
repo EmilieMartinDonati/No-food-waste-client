@@ -12,12 +12,18 @@ const Navbar = () => {
   };
 
   return (
-    <nav>
+    <nav className="navbar navbar-dark bg-dark px-5 py-3">
       {!isLoggedIn && (
         <>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/login">Log in</NavLink>
-          <NavLink to="/signup">Sign up</NavLink>
+          <NavLink className={"nav-link"} to="/">
+            Home
+          </NavLink>
+          <NavLink className={"nav-link"} to="/login">
+            Log in
+          </NavLink>
+          <NavLink className={"nav-link"} to="/signup">
+            Sign up
+          </NavLink>
         </>
       )}
 
@@ -25,15 +31,25 @@ const Navbar = () => {
         <>
           {currentUser.role === "user" && (
             <>
-              <NavLink to="/listings">Search</NavLink>
-              <NavLink to="/favorites">Favorites</NavLink>
+              <NavLink className={"nav-link"} to="/listings">
+                Search
+              </NavLink>
+              <NavLink className={"nav-link"} to="/favorites">
+                Favorites
+              </NavLink>
             </>
           )}
           {currentUser.role === "business" && (
-            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink className={"nav-link"} to="/dashboard">
+              Dashboard
+            </NavLink>
           )}
-          <NavLink to="/account">My account</NavLink>
-          <button onClick={handleClick}>Log out</button>
+          <NavLink className={"nav-link"} to="/account">
+            My account
+          </NavLink>
+          <button className="btn btn-danger" onClick={handleClick}>
+            Log out
+          </button>
         </>
       )}
     </nav>

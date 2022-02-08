@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Onboarding from "./Onboarding";
 import ListingsList from "./ListingsList";
-import axios from "axios";
 import useAuth from "../../context/UseAuth";
 import { useNavigate } from "react-router-dom";
+import apiHandler from "../../API/APIHandler";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
-  const [businessOfCurrentUser, setBusinessOfCurrentUser] = useState();
+  const [businessOfCurrentUser, setBusinessOfCurrentUser] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/business")
+    apiHandler
+      .get("/api/business")
       .then((allBusinesses) => {
-        allBusinesses.data.find(
+        return allBusinesses.data.find(
           (business) => business.owner === currentUser._id
         );
       })
@@ -24,14 +24,19 @@ const Dashboard = () => {
 
   return (
     <div>
-      {!businessOfCurrentUser && <Onboarding />}
-      {businessOfCurrentUser && (
-        <>
-          <ListingsList business={businessOfCurrentUser} />
-          <button onClick={() => navigate("/listings/create")}>
-            Add a listing
+      {!businessOfCurrentUser && (
+        <div>
+          <p className="p-5">Vous n'avez pas encore de business enregistré</p>
+          <button
+            className="btn btn-primary py-2 px-5"
+            onClick={() => navigate("/onboarding")}
+          >
+            New business
           </button>
-        </>
+        </div>
+      )}
+      {businessOfCurrentUser && (
+        <ListingsList business={businessOfCurrentUser} />
       )}
     </div>
   );

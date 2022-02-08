@@ -22,11 +22,21 @@ const AuthRole = ({ setRole }) => {
   return (
     <div>
       {!isLoggedIn && (
-        <>
-          <h1>How will you help us stop wasting food?</h1>
-          <button onClick={handleUserSubmit}>I will buy food</button>
-          <button onClick={handleBusinessSubmit}>I will sell food</button>
-        </>
+        <div className="p-5">
+          <h1 className="my-5">How will you help us stop wasting food?</h1>
+          <button
+            className="btn btn-primary mx-4 px-3"
+            onClick={handleUserSubmit}
+          >
+            I will buy food
+          </button>
+          <button
+            className="btn btn-primary mx-4 px-3"
+            onClick={handleBusinessSubmit}
+          >
+            I will sell food
+          </button>
+        </div>
       )}
       {isLoggedIn && currentUser.role === "user" && navigate("/discover")}
       {isLoggedIn && currentUser.role === "business" && navigate("/dashboard")}

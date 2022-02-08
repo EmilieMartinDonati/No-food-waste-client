@@ -19,6 +19,7 @@ const Onboarding = () => {
 
   return (
     <div>
+      <>Hello</>
       {step === 1 && (
         <DescribeYourBusiness setBusiness={setBusiness} setStep={setStep} />
       )}

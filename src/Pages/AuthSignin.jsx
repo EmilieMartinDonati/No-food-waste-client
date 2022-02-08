@@ -26,9 +26,10 @@ const AuthSignin = ({ role }) => {
       .then((res) => {
         storeToken(res.authToken);
         authenticateUser();
-        // navigate("/welcome");
-        // role === "user" ? navigate("/discover") : navigate("/dashboard");
-        currentUser.role === "user" ? navigate("/discover") : navigate("/dashboard");
+
+        currentUser.role === "user"
+          ? navigate("/discover")
+          : navigate("/dashboard");
       })
       .catch((e) => console.log(e));
   };
