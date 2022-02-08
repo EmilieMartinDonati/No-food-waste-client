@@ -15,8 +15,10 @@ const Browse = () => {
   const [listings, setListings] = useState([]);
   const [userAddress, setUserAddress] = useState("");
   const [mapOrList, setMapOrList] = useState("list");
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+  // const [latitude, setLatitude] = useState(0);
+  // const [longitude, setLongitude] = useState(0);
+
+  const [search, setSearch] = useState("");
 
 
   const containerStyle = {
@@ -85,8 +87,6 @@ const Browse = () => {
     initLocalisations()
   }, [listings])
 
-  //console.log("listing after init", listing);
-
   const fetchGeocode = (listing) => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -126,6 +126,16 @@ const Browse = () => {
     e.preventDefault();
   }
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const data = {
+      search: search
+    }
+    // apiHandler.post("/categories", data)
+    // .then((dbRes) => console.log(dbRes))
+    // .catch((e) => console.log(e))
+  }
+
   return (
     <div className="container">
       <div className="row">
@@ -137,13 +147,14 @@ const Browse = () => {
 
       <div className="row">
         <div className="col-12">
-          <form action="/" method="get">
+          <form onSubmit={handleSearch}>
             <label htmlFor="search">
             </label>
             <input
               type="text"
               id="search"
               placeholder="Search by categories"
+              onChange={(e) => setSearch(e.target.value)}
             />
             <button type="submit">Search</button>
           </form>

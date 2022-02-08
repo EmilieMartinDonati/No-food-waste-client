@@ -14,7 +14,7 @@ import Onboarding from "./Pages/Dashboard/Onboarding";
 import CreateListing from "./Pages/Listing-CRUD/CreateListing";
 import ModifyListing from "./Pages/Listing-CRUD/ModifyListing";
 import Account from "./Pages/Account/Account";
-import Bookings from "./Pages/Account/Bookings";
+// import Bookings from "./Pages/Account/Bookings";
 import OneBooking from "./Pages/Account/OneBooking";
 // import Welcome from "./Pages/Welcome";
 
@@ -46,7 +46,7 @@ function App() {
         <Route path="/listings" element={<Browse />} />
         <Route path="/listing/:id" element={<ListingDetails />} />
         <Route path="/account" element={<Account />} />
-        <Route path="/account/bookings/" element={<Bookings />} />
+        {/* <Route path="/account/bookings/" element={<Bookings />} /> */}
         <Route path="/account/bookings/:id" element={<OneBooking />} />
       </Routes>
     </div>
