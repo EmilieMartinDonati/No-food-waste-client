@@ -36,7 +36,10 @@ const Dashboard = () => {
         </div>
       )}
       {businessOfCurrentUser && (
-        <ListingsList business={businessOfCurrentUser} />
+        <ListingsList
+          business={businessOfCurrentUser}
+          setBusiness={setBusinessOfCurrentUser}
+        />
       )}
     </div>
   );

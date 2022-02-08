@@ -12,6 +12,7 @@ import Browse from "./Pages/Discover/Browse";
 import ListingDetails from "./Pages/Discover/ListingDetails";
 import Onboarding from "./Pages/Dashboard/Onboarding";
 import CreateListing from "./Pages/Listing-CRUD/CreateListing";
+import ModifyListing from "./Pages/Listing-CRUD/ModifyListing";
 import Account from "./Pages/Account/Account";
 import Bookings from "./Pages/Account/Bookings";
 import OneBooking from "./Pages/Account/OneBooking";
@@ -37,6 +38,10 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/listings/create" element={<CreateListing />} />
+          <Route
+            path="/listings/:listingId/update"
+            element={<ModifyListing />}
+          />
         </Route>
         <Route path="/listings" element={<Browse />} />
         <Route path="/listing/:id" element={<ListingDetails />} />

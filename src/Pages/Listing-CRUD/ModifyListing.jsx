@@ -1,38 +1,50 @@
-import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import apiHandler from "../../API/APIHandler";
 
-const CreateListing = () => {
+const ModifyListing = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [availableQuantity, setAvailableQuantity] = useState("");
   const [description, setDescription] = useState("");
-  const [recurring, setRecurring] = useState(true);
+  const [recurring, setRecurring] = useState("");
 
   const navigate = useNavigate();
+  const { listingId } = useParams();
 
-  const { businessId } = useLocation().state;
+  useEffect(() => {
+    apiHandler
+      .get(`/api/listings/${listingId}`)
+      .then((dbResponse) => {
+        // setListing(dbResponse.data);
+        setName(dbResponse.data.name);
+        setPrice(dbResponse.data.price);
+        setAvailableQuantity(dbResponse.data.availableQuantity);
+        setDescription(dbResponse.data.description);
+        setRecurring(dbResponse.data.recurring);
+      })
+      .catch((err) => console.error(err));
+  }, [listingId]);
 
-  const handleClick = (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
 
     apiHandler
-      .post(`/api/listings/${businessId}/create`, {
+      .patch(`/api/listings/modify/${listingId}`, {
         name,
         price,
         availableQuantity,
         description,
         recurring,
       })
-      .then((dbRes) => {
-        console.log("This is dbRes from line 15 of CreatingList", dbRes);
+      .then(() => {
         navigate("/dashboard");
       })
       .catch((err) => console.error(err));
   };
 
   return (
-    <form className="p-4">
+    <form className="p-4" onSubmit={(evt) => handleSubmit(evt)}>
       <h2 className="mx-3">Your listing's info</h2>
 
       <div className="form-group m-3">
@@ -40,7 +52,8 @@ const CreateListing = () => {
           className="form-control"
           type="text"
           name="name"
-          placeholder="Name of your listing"
+          id="name"
+          value={name}
           onChange={(evt) => setName(evt.target.value)}
         />
       </div>
@@ -50,7 +63,8 @@ const CreateListing = () => {
           className="form-control"
           type="number"
           name="price"
-          placeholder="How much?"
+          id="price"
+          value={price}
           onChange={(evt) => setPrice(evt.target.value)}
         />
       </div>
@@ -60,7 +74,8 @@ const CreateListing = () => {
           className="form-control"
           type="number"
           name="availableQuantity"
-          placeholder="How many?"
+          id="availableQuantity"
+          value={availableQuantity}
           onChange={(evt) => setAvailableQuantity(evt.target.value)}
         />
       </div>
@@ -70,7 +85,8 @@ const CreateListing = () => {
           className="form-control"
           type="text"
           name="description"
-          placeholder="Please provide a short description"
+          id="description"
+          value={description}
           onChange={(evt) => setDescription(evt.target.value)}
         />
       </div>
@@ -84,9 +100,10 @@ const CreateListing = () => {
           type="radio"
           idfor="recurring"
           name="recurring"
+          id="recurring"
           value={true}
           checked={recurring === true}
-          onChange={(evt) => setRecurring(evt.target.value && true)}
+          onChange={(evt) => setRecurring(evt.target.checked && true)}
         />
         <label className="mx-4" htmlFor="recurring">
           No
@@ -95,20 +112,16 @@ const CreateListing = () => {
           type="radio"
           idfor="recurring"
           name="recurring"
+          id="recurring"
+          value={true}
           checked={recurring === false}
-          value={false}
           onChange={(evt) => setRecurring(evt.target.value && false)}
         />
       </div>
 
-      <button
-        className="btn btn-primary px-5 py-2"
-        onClick={(evt) => handleClick(evt)}
-      >
-        Create a new listing
-      </button>
+      <button className="btn btn-primary px-5 py-2">Modify the listing</button>
     </form>
   );
 };
 
-export default CreateListing;
+export default ModifyListing;
