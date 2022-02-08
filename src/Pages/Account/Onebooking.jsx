@@ -68,7 +68,7 @@ const OneBooking = () => {
     }
 
     console.log("booking", booking)
-    if (booking && booking.listing.coord) {
+    if (booking && booking?.listing?.coord) {
         console.log({
             lat: Number(booking?.listing?.coord?.lat),
             lng: Number(booking?.listing?.coord?.lng)
@@ -78,11 +78,11 @@ const OneBooking = () => {
         <>
             <h1>One Booking</h1>
             <h3>Hello</h3>
-            {booking &&  (
+            {booking && (
                 <>
-                    <p>{booking.listing.name}</p>
+                    <p>{booking.listing?.name}</p>
                     <p>Reserved quantity = {booking.quantity}</p>
-                    <p>{booking.listing.owner.address}</p>
+                    <p>{booking.listing?.owner?.address}</p>
 
                     <LoadScript
                         googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk"
