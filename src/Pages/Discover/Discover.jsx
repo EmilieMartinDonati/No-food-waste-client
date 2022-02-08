@@ -137,7 +137,10 @@ const Discover = () => {
         </div>
         <div className="row">
           <div className="col-12 d-inline-flex">
-            {allListings.map((listing) => {
+
+            {allListings.length > 0 && 
+              
+              allListings.map((listing) => {
               return <ListingCard listing={listing} />;
             })}
           </div>

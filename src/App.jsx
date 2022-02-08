@@ -35,6 +35,7 @@ function App() {
         <Route path="/testTimeSlot" element={<TimeSlots />} />
         <Route element={<PrivateRoute />}>
           <Route path="/discover" element={<Discover />} />
+          <Route path="/category" />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/listings/create" element={<CreateListing />} />

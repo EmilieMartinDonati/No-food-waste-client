@@ -19,6 +19,7 @@ const Browse = () => {
   // const [longitude, setLongitude] = useState(0);
 
   const [search, setSearch] = useState("");
+  const [categories, setCategories] = useState([]);
 
 
   const containerStyle = {
@@ -73,10 +74,10 @@ const Browse = () => {
       console.log("Longitude is :", position.coords.longitude);
       setLongitudeUser(position.coords.longitude);
     });
-    apiHandler.get("/discover").then((res) => {
-      console.log(res.data);
-      setListings(res.data);
-      console.log(listings);
+    apiHandler.get("/listings").then((res) => {
+      console.log("this is the res from the db line 77", res);
+      setListings(res.data.listings);
+      setCategories(res.data.categories);
     }
     )
       .catch((e) => console.log(e));
@@ -108,14 +109,14 @@ const Browse = () => {
         const res = await fetchGeocode(listing);
         console.log(">>", res);
         listing.coord = res;
-        console.log("this is the listing with the coordinates", listing);
+        // console.log("this is the listing with the coordinates", listing);
       }
     } catch (err) {
       console.error(err)
     }
   }
 
-  console.log("listings, I hope they have the coordinates", listings);
+  // console.log("listings, I hope they have the coordinates", listings);
 
 
   const handleSubmit = (e) => {
@@ -131,6 +132,13 @@ const Browse = () => {
     const data = {
       search: search
     }
+    apiHandler.post("/category", data)
+      .then((res) => {
+        console.log("this is the response for the cat line 133", res.data.listings);
+        setListings(res.data.listings)
+      }
+      )
+      .catch((e) => console.log(e));
     // apiHandler.post("/categories", data)
     // .then((dbRes) => console.log(dbRes))
     // .catch((e) => console.log(e))
@@ -150,12 +158,14 @@ const Browse = () => {
           <form onSubmit={handleSearch}>
             <label htmlFor="search">
             </label>
-            <input
-              type="text"
-              id="search"
-              placeholder="Search by categories"
-              onChange={(e) => setSearch(e.target.value)}
-            />
+            <select id="search" onChange={(e) => setSearch(e.target.value)}>
+              {categories.map((category) => {
+                console.log(category);
+                return (
+                  <option key={category._id} value={category._id}>{category.name}</option>
+                )
+              })}
+            </select>
             <button type="submit">Search</button>
           </form>
         </div>
@@ -185,11 +195,9 @@ const Browse = () => {
         <div className="col-6 d-flex-column justify-content-center">
 
           {listings.map((listing) => {
-            {/* console.log("this is the log of the listing", listing._id); */ }
             return (
               <div key={listing._id}>
                 <ListingCard listing={listing} />
-                {/* <NavLink to={`/listing/${listing._id}`}><h4>Interested by this offer ? Click to learn more and conclude your reservation</h4></NavLink> */}
               </div>
             )
           })
@@ -201,7 +209,6 @@ const Browse = () => {
         <div className="col-6 d-flex-column justify-content-center">
           <p className="text-uppercase">See on card</p>
           {listings.map((listing) => {
-            console.log("gimme the damn coord :'(", listing)
             const center = {
               lat: listing.coord?.lat,
               lng: listing.coord?.lng,
