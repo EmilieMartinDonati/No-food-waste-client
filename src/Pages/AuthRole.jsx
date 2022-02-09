@@ -22,8 +22,10 @@ const AuthRole = ({ setRole }) => {
   return (
     <div>
       {!isLoggedIn && (
-        <div className="p-5">
-          <h1 className="my-5">How will you help us stop wasting food?</h1>
+        <div id="cover-image-auth-role">
+          <h1 style={{ "font-size": "7rem", color: "white" }} className="py-5">
+            How will you help us stop wasting food?
+          </h1>
           <button
             className="btn btn-primary mx-4 px-3"
             onClick={handleUserSubmit}

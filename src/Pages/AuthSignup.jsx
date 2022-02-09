@@ -42,16 +42,28 @@ const AuthSignup = ({ role }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} onChange={handleChange}>
-        <label htmlFor="name">NAME</label>
-        <input type="text" id="name" required />
-        <label htmlFor="email">EMAIL</label>
-        <input type="text" id="email" required />
-        <label htmlFor="password">PASSWORD</label>
-        <input type="password" id="password" required />
-        <button>
-          <h5>SIGN UP</h5>
-        </button>
+      <h2 className="pt-5">Create an account</h2>
+      <form onSubmit={handleSubmit} onChange={handleChange} className="pb-5">
+        <div className="form-group p-5">
+          <label className="m-3" htmlFor="name">
+            NAME
+          </label>
+          <input className="form-control" type="text" id="name" required />
+          <label className="m-3" htmlFor="email">
+            EMAIL
+          </label>
+          <input className="form-control" type="text" id="email" required />
+          <label className="m-3" htmlFor="password">
+            PASSWORD
+          </label>
+          <input
+            className="form-control"
+            type="password"
+            id="password"
+            required
+          />
+        </div>
+        <button className="btn btn-primary px-5 py-2">SIGN UP</button>
       </form>
       <NavLink to="/login" role={role}>
         <h3>Already registered ? Log in</h3>

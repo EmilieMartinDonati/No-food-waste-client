@@ -8,14 +8,10 @@ const SetYourTimeSlots = ({ business }) => {
   const navigate = useNavigate();
 
   const handleStartTimeChange = (evt) => {
-    console.log("start time", evt.target.value);
-    console.log("start time typeof", typeof evt.target.value);
     setStartTimeSlot(new Date(evt.target.value));
   };
 
   const handleEndTimeChange = (evt) => {
-    console.log("end time", evt.target.value);
-    console.log("end time typeof", typeof evt.target.value);
     setEndTimeSlot(new Date(evt.target.value));
   };
 
