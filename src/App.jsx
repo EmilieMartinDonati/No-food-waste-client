@@ -36,6 +36,9 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/discover" element={<Discover />} />
           <Route path="/category" />
+          <Route path="/account" element={<Account />} />
+          <Route path="/account/bookings/:id" element={<OneBooking />} />
+          {/* <Route path="/account/bookings/delete/:id" /> */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/listings/create" element={<CreateListing />} />
@@ -46,9 +49,6 @@ function App() {
         </Route>
         <Route path="/listings" element={<Browse />} />
         <Route path="/listing/:id" element={<ListingDetails />} />
-        <Route path="/account" element={<Account />} />
-        {/* <Route path="/account/bookings/" element={<Bookings />} /> */}
-        <Route path="/account/bookings/:id" element={<OneBooking />} />
       </Routes>
     </div>
   );

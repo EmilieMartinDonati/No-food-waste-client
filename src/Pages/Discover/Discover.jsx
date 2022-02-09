@@ -89,19 +89,19 @@ const Discover = () => {
       console.log("Longitude is :", position.coords.longitude);
       setLongitude(position.coords.longitude);
     });
-    let isMounted = true;
-    if (isMounted) {
+    // let isMounted = true;
+    // if (isMounted) {
       axios
-        .get("http://localhost:4000/listings")
+        .get("http://localhost:4000/discover")
         .then((dbRes) => {
           console.log("this is db Res for allListings", dbRes);
           setAllListings(dbRes.data);
         })
         .catch((err) => console.error(err));
-    }
-    return () => {
-      isMounted = false;
-    };
+    // }
+    // return () => {
+    //   isMounted = false;
+    // };
   }, []);
 
   return (
@@ -137,10 +137,8 @@ const Discover = () => {
         </div>
         <div className="row">
           <div className="col-12 d-inline-flex">
-
-            {allListings.length > 0 && 
               
-              allListings.map((listing) => {
+              {allListings.map((listing) => {
               return <ListingCard listing={listing} />;
             })}
           </div>

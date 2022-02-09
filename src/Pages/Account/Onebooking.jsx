@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import apiHandler from '../../API/APIHandler';
 import Geocode from "react-geocode";
 import { GoogleMap, LoadScript, LoadScriptNext } from '@react-google-maps/api';
+import BookingCard from "../../components/BookingCard";
 
 Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
 Geocode.setLanguage("fr");
@@ -10,6 +11,8 @@ Geocode.setLanguage("fr");
 const OneBooking = () => {
 
     const { id } = useParams();
+
+    const navigate = useNavigate();
 
     const [booking, setBooking] = useState(null);
     // const [center, setCenter] = useState({});
@@ -52,8 +55,6 @@ const OneBooking = () => {
         })
     }
 
-    // So we re-await fetchGeocode here becauuuuse.
-
     const initLocalisations = async () => {
         try {
             const res = await fetchGeocode(booking);
@@ -74,15 +75,15 @@ const OneBooking = () => {
             lng: Number(booking?.listing?.coord?.lng)
         })
     }
+
+
     return (
         <>
-            <h1>One Booking</h1>
-            <h3>Hello</h3>
             {booking && (
                 <>
-                    <p>{booking.listing?.name}</p>
-                    <p>Reserved quantity = {booking.quantity}</p>
-                    <p>{booking.listing?.owner?.address}</p>
+
+                   <BookingCard booking={booking}/>
+                
 
                     <LoadScript
                         googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk"

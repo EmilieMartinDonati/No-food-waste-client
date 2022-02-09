@@ -136,7 +136,7 @@ const Browse = () => {
           "this is the response for the cat line 133",
           res.data.listings
         );
-        setListings(res.data.listings);
+          setListings(res.data.listings);
       })
       .catch((e) => console.log(e));
     // apiHandler.post("/categories", data)
@@ -217,6 +217,7 @@ const Browse = () => {
       <div className="row">
         <div className="col-6 d-flex-column justify-content-center">
           {listings.map((listing) => {
+            if (listing.availableQuantity > 0 )
             return (
               <div key={listing._id}>
                 <ListingCard listing={listing} />
@@ -232,6 +233,7 @@ const Browse = () => {
               lat: listing.coord?.lat,
               lng: listing.coord?.lng,
             };
+            if (listing.availableQuantity > 0 )
             return (
               <>
                 <h4>{listing.name}</h4>

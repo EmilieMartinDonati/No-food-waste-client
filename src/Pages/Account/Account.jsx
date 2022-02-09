@@ -23,7 +23,7 @@ const Account = () => {
             <h1>Welcome {user.name}</h1>
             <h3>Here are your bookings</h3>
 
-            {bookings.length > 0 && (
+            {bookings && bookings.length > 0 && (
                 bookings.map((booking) => {
                     return (
                         <>
