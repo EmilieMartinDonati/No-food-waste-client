@@ -16,10 +16,11 @@ import ModifyListing from "./Pages/Listing-CRUD/ModifyListing";
 import Account from "./Pages/Account/Account";
 // import Bookings from "./Pages/Account/Bookings";
 import OneBooking from "./Pages/Account/OneBooking";
+import Favorites from "./Pages/Account/Favorites";
 // import Welcome from "./Pages/Welcome";
 
-// Page Test pour le TimeSlot
-import TimeSlots from "./PagesTest/TimeSlots";
+// // Page Test pour le TimeSlot
+// import TimeSlots from "./PagesTest/TimeSlots";
 
 function App() {
   const [role, setRole] = useState("user");
@@ -32,7 +33,7 @@ function App() {
         <Route path="/" element={<AuthRole setRole={setRole} />} />
         <Route path="/signup" element={<AuthSignup role={role} />} />
         <Route path="/login" element={<AuthSignin role={role} />} />
-        <Route path="/testTimeSlot" element={<TimeSlots />} />
+        {/* <Route path="/testTimeSlot" element={<TimeSlots />} /> */}
         <Route element={<PrivateRoute />}>
           <Route path="/discover" element={<Discover />} />
           <Route path="/category" />
@@ -46,6 +47,7 @@ function App() {
             path="/listings/:listingId/update"
             element={<ModifyListing />}
           />
+          <Route path="/favorites" element={<Favorites />} />
         </Route>
         <Route path="/listings" element={<Browse />} />
         <Route path="/listing/:id" element={<ListingDetails />} />

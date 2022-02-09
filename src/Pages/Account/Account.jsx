@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import APIHandler from "../../API/APIHandler";
 import { Link } from "react-router-dom";
+import BookingCard from "../../components/BookingCard.jsx";
 
 const Account = () => {
 
@@ -27,13 +28,18 @@ const Account = () => {
                 bookings.map((booking) => {
                     return (
                         <>
+
                             <div className="card" style={{ width: "30rem" }}>
-                                {/* <img className="card-img-top" src={listing.owner.picture} alt={listing.name} /> */}
+                                <img
+                                    className="card-img-top"
+                                    src={booking.listing?.owner?.picture}
+                                    alt={booking.listing?.name}
+                                />
                                 <div className="card-body">
-                                    <h5 className="card-title">{booking.listing?.name}</h5>
+                                    <h5 className="card-title">Reserved quantity : {booking.quantity}</h5>
                                     <h5 className="card-text">Price: {booking.listing?.price}€</h5>
-                                    <p className="card-text">{booking.listing?.description}</p>
-                                    <p className="card-text"> Reserved quantity {booking.quantity}</p>
+                                    <p className="card-text">{booking.listing?.owner?.address}</p>
+                                    <p className="card-text">Pick up by {booking.listing?.owner?.pickupTimeSlots}</p>
                                     <Link to={`/account/bookings/${booking._id}`}>See this booking</Link>
                                 </div>
                             </div>
