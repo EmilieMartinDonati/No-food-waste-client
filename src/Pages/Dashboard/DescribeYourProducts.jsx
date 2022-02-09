@@ -1,22 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import apiHandler from "../../API/APIHandler";
 
 const DescribeYourProducts = ({ setBusiness, setStep }) => {
+  const [options, setOptions] = useState([]);
   const [tags, setTags] = useState([]);
+
+  // This hook will retrieve all possible categories that will be options for tags dropdown
+  useEffect(() => {
+    apiHandler
+      .get("/api/category")
+      .then((dbRes) => {
+        console.log("dbRes.data line 13 >>>>>>>", dbRes.data);
+        setOptions(dbRes.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  console.log("Options >>> line 16", options);
 
   // This function will add very selected tag to the tags array
   const handleChange = (evt) => {
     const newTags = [];
-    const options = evt.target.selectedOptions;
+    const selectedOptions = evt.target.selectedOptions;
 
-    // Note: here I use a for loop because I can't map or ForEach the HTML collection
-    // that I get from evt.target.selectedOptions
+    // Note: here I use a for loop because I can't do map or ForEach the HTML collection that I get from evt.target.selectedOptions
     // Even if I do a Array.of or an equivalent to transform the collection
-    for (let i = 0; i < options.length; i++) {
-      newTags.push(options[i].value);
+    for (let i = 0; i < selectedOptions.length; i++) {
+      newTags.push(selectedOptions[i].value);
     }
-
-    console.log("This is newTags on line 18", newTags);
-
     setTags(newTags);
   };
 
@@ -52,24 +63,12 @@ const DescribeYourProducts = ({ setBusiness, setStep }) => {
           onChange={(evt) => handleChange(evt)}
           multiple
         >
-          <option className="dropdown-item" value="Restaurant">
-            Restaurant
-          </option>
-          <option className="dropdown-item" value="Bakery">
-            Bakery
-          </option>
-          <option className="dropdown-item" value="Supermarket">
-            Supermarket
-          </option>
-          <option className="dropdown-item" value="Vegan">
-            Vegan
-          </option>
-          <option className="dropdown-item" value="Vegetarian">
-            Vegetarian
-          </option>
-          <option className="dropdown-item" value="Italian">
-            Italian
-          </option>
+          {options &&
+            options.map((option) => (
+              <option className="dropdown-item" value={option._id}>
+                {option.name}
+              </option>
+            ))}
         </select>
       </div>
 

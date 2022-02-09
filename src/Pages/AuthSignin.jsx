@@ -36,24 +36,31 @@ const AuthSignin = ({ role }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">EMAIL</label>
-        <input
-          type="text"
-          name="email"
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="password">PASSWORD</label>
-        <input
-          type="password"
-          name="password"
-          required
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button>
-          <h5>LOG IN</h5>
-        </button>
+      <h1 className="pt-5">Sign in</h1>
+      <form className="pb-5" onSubmit={handleSubmit}>
+        <div className="form-group p-5">
+          <label className="m-3" htmlFor="email">
+            EMAIL
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            name="email"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label className="m-3" htmlFor="password">
+            PASSWORD
+          </label>
+          <input
+            className="form-control"
+            type="password"
+            name="password"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button className="btn btn-primary px-5 py-2">LOG IN</button>
       </form>
     </>
   );

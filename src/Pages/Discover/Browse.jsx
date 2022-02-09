@@ -116,14 +116,6 @@ const Browse = () => {
 
   // console.log("listings, I hope they have the coordinates", listings);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const handleSubmit2 = (e) => {
-    e.preventDefault();
-  };
-
   const handleSearch = (e) => {
     e.preventDefault();
     const data = {
@@ -145,7 +137,7 @@ const Browse = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container ">
       <div className="row">
         <div className="col-12">
           <h1 className="text-center text-danger">BROWSE</h1>
@@ -177,78 +169,64 @@ const Browse = () => {
 
       <div className="row">
         <div className="col-6">
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="list"
-              value="list"
-              style={{
-                visibility: "hidden",
-              }}
-            />
-            <button
-              className="btn-info"
-              onClick={(e) => setMapOrList(e.target.value)}
-            >
-              LIST
-            </button>
-          </form>
+          <button
+            className="btn-info"
+            value="list"
+            onClick={(e) => setMapOrList(e.target.value)}
+          >
+            LIST
+          </button>
         </div>
         <div className="col-6">
-          <form onSubmit={handleSubmit2}>
-            <input
-              type="text"
-              name="map"
-              value="map"
-              style={{
-                visibility: "hidden",
-              }}
-            />
-            <button
-              className="btn-info"
-              onClick={(e) => setMapOrList(e.target.value)}
-            >
-              MAP
-            </button>
-          </form>
+          <button
+            className="btn-info"
+            value="map"
+            onClick={(e) => setMapOrList(e.target.value)}
+          >
+            MAP
+          </button>
         </div>
       </div>
 
       <div className="row">
-        <div className="col-6 d-flex-column justify-content-center">
-          {listings.map((listing) => {
-            return (
-              <div key={listing._id}>
-                <ListingCard listing={listing} />
-              </div>
-            );
-          })}
-        </div>
+        {mapOrList === "list" && (
+          <div className="col-12 d-inline-flex justify-content-center">
+            {listings.map((listing) => {
+              return (
+                <div key={listing._id}>
+                  <ListingCard listing={listing} />
+                </div>
+              );
+            })}
+          </div>
+        )}
 
-        <div className="col-6 d-flex-column justify-content-center">
-          <p className="text-uppercase">See on card</p>
-          {listings.map((listing) => {
-            const center = {
-              lat: listing.coord?.lat,
-              lng: listing.coord?.lng,
-            };
-            return (
-              <>
-                <h4>{listing.name}</h4>
-                <p>{listing.owner.address}</p>
-                <p>{listing.coord?.lat}</p>
-                <p>{listing.coord?.lng}</p>
-                <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
-                  <GoogleMap
-                    mapContainerStyle={containerStyle}
-                    center={center}
-                    zoom={20}
-                  ></GoogleMap>
-                </LoadScript>
-              </>
-            );
-          })}
-        </div>
+        {mapOrList === "map" && (
+          <div className="col-12 d-inline-grid justify-content-center">
+            <p className="text-uppercase">See on card</p>
+            {listings.map((listing) => {
+              const center = {
+                lat: listing.coord?.lat,
+                lng: listing.coord?.lng,
+              };
+              return (
+                <>
+                  <h4>{listing.name}</h4>
+                  <p>{listing.owner.address}</p>
+                  <p>{listing.coord?.lat}</p>
+                  <p>{listing.coord?.lng}</p>
+                  <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
+                    <GoogleMap
+                      mapContainerStyle={containerStyle}
+                      center={center}
+                      zoom={20}
+                    ></GoogleMap>
+                  </LoadScript>
+                </>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -40,6 +40,7 @@ const UserProvider = ({ children }) => {
   };
   const storeToken = (token) => {
     localStorage.setItem("authToken", token);
+    authenticateUser();
   };
 
   const authValues = {
