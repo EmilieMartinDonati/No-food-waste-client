@@ -138,12 +138,13 @@ const Browse = () => {
     const data = {
       search: search,
     };
+    console.log("this is the console line 141", data);
     apiHandler
       .post("/category", data)
       .then((res) => {
         console.log(
           "this is the response for the cat line 133",
-          res.data.listings
+          res.data
         );
         setListings(res.data.listings);
       })
