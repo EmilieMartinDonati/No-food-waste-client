@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 import apiHandler from "../../API/APIHandler";
 
 // Icons imports
-import { TrashIcon, KebabHorizontalIcon } from "@primer/octicons-react";
+import {
+  TrashIcon,
+  KebabHorizontalIcon,
+  CheckCircleFillIcon,
+  XCircleFillIcon,
+} from "@primer/octicons-react";
 
 const ListingsList = ({ business, setBusiness }) => {
   const navigate = useNavigate();
@@ -44,9 +49,13 @@ const ListingsList = ({ business, setBusiness }) => {
               <strong className="col-sm p-4">Description</strong>
               <strong className="col-sm p-4">Modify</strong>
               <strong className="col-sm p-4">Delete</strong>
+              <strong className="col-sm p-4">Active</strong>
             </div>
             {business.listings.map((listing) => (
-              <div className="row" key={listing._id}>
+              <div
+                className={listing.archived ? "row gray-listing" : "row"}
+                key={listing._id}
+              >
                 <span className="col-sm p-4">{listing.name}</span>
                 <span className="col-sm p-4">{listing.price} €</span>
                 <span className="col-sm p-4">{listing.availableQuantity}</span>
@@ -64,6 +73,11 @@ const ListingsList = ({ business, setBusiness }) => {
                   className="col-sm p-4"
                 >
                   <TrashIcon size={24} />
+                </span>
+                <span className="col-sm p-4">
+                  {listing.archived && <XCircleFillIcon size={24} />}
+                  {!listing.archived && <CheckCircleFillIcon size={24} />}
+                  {/* {!listing.archived && listing.owner.endTimeSlot &&<CheckCircleFillIcon size={24} />} */}
                 </span>
               </div>
             ))}

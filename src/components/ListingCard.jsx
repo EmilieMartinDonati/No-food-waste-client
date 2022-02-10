@@ -91,9 +91,17 @@ const ListingCard = ({ listing }) => {
   };
 
   return (
-    <div className="card" style={{ width: "auto" }}>
+    <div
+      className="card my-3"
+      style={{
+        minWidth: "300px",
+        maxWidth: "25vw",
+        borderRadius: "10px",
+      }}
+    >
       <img
         className="card-img-top"
+        style={{ height: 200 }}
         src={listing.owner?.picture}
         alt={listing.name}
       />

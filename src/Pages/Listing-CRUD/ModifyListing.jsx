@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import apiHandler from "../../API/APIHandler";
+import Switch from "react-switch";
 
 const ModifyListing = () => {
   const [name, setName] = useState("");
@@ -8,6 +9,7 @@ const ModifyListing = () => {
   const [availableQuantity, setAvailableQuantity] = useState("");
   const [description, setDescription] = useState("");
   const [recurring, setRecurring] = useState("");
+  const [archived, setArchived] = useState("");
 
   const navigate = useNavigate();
   const { listingId } = useParams();
@@ -22,6 +24,7 @@ const ModifyListing = () => {
         setAvailableQuantity(dbResponse.data.availableQuantity);
         setDescription(dbResponse.data.description);
         setRecurring(dbResponse.data.recurring);
+        setArchived(dbResponse.data.archived);
       })
       .catch((err) => console.error(err));
   }, [listingId]);
@@ -36,11 +39,16 @@ const ModifyListing = () => {
         availableQuantity,
         description,
         recurring,
+        archived,
       })
       .then(() => {
         navigate("/dashboard");
       })
       .catch((err) => console.error(err));
+  };
+
+  const handleSwitch = () => {
+    archived ? setArchived(false) : setArchived(true);
   };
 
   return (
@@ -91,7 +99,7 @@ const ModifyListing = () => {
         />
       </div>
 
-      <div className="m-3">
+      <div className="m-5">
         <h3>Is the listing reccuring?</h3>
         <label className="mx-4" htmlFor="recurring">
           Yes
@@ -119,7 +127,29 @@ const ModifyListing = () => {
         />
       </div>
 
-      <button className="btn btn-primary px-5 py-2">Modify the listing</button>
+      <div className="m-5">
+        <h3>Is the listing active?</h3>
+        {recurring && (
+          <p className="my-3">
+            Note: your listing is marked as recurring. Therefore, it will always
+            be active by default.
+          </p>
+        )}
+        {!recurring && (
+          <p className="my-3">
+            Note: your listing is marked as non-recurring. Therefore, it will be
+            set as inactive after today's end pickup date.
+          </p>
+        )}
+        <label className="mx-4">Inactive</label>
+        <Switch onChange={handleSwitch} checked={!archived} />
+        <label className="mx-4">Active</label>
+      </div>
+      <div className="py-3">
+        <button className="btn btn-primary px-5 py-2">
+          Modify the listing
+        </button>
+      </div>
     </form>
   );
 };

@@ -49,3 +49,13 @@ button {
   width: min(100vw, 100%);
   height: 100vh;
 }
+
+#listing-card-div-flex {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.gray-listing {
+  color: lightgray;
+}

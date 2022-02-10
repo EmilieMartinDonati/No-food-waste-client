@@ -13,14 +13,13 @@ const Browse = () => {
   const [latitudeUser, setLatitudeUser] = useState(0);
   const [longitudeUser, setLongitudeUser] = useState(0);
 
-
   const [listings, setListings] = useState([]);
   const [userAddress, setUserAddress] = useState("");
   const [mapOrList, setMapOrList] = useState("list");
   const [allLat, setAllLat] = useState([]);
   const [allLong, setAllLong] = useState([]);
   const [theCenter, setTheCenter] = useState(0);
-  const [listingMap, setListingMap] = useState([])
+  const [listingMap, setListingMap] = useState([]);
 
   const [search, setSearch] = useState("");
   const [categories, setCategories] = useState([]);
@@ -29,7 +28,7 @@ const Browse = () => {
     width: "700px",
     height: "100vh",
     marginLeft: "3%",
-    className: "img-responsive"
+    className: "img-responsive",
   };
 
   const center = {
@@ -129,30 +128,24 @@ const Browse = () => {
 
   console.log("listings, I hope they have the coordinates", listings);
 
-
-
   if (listings.length > 1) {
-    const coordsReduced =
-      listings.reduce(function (a, b) {
-        console.log("console inside the reduce", a, b);
-        return {
-          lat: a.coord?.lat + b.coord?.lat,
-          lng: a.coord?.lng + b.coord?.lng
-        }
-      });
+    const coordsReduced = listings.reduce(function (a, b) {
+      console.log("console inside the reduce", a, b);
+      return {
+        lat: a.coord?.lat + b.coord?.lat,
+        lng: a.coord?.lng + b.coord?.lng,
+      };
+    });
     // console.log("this is the result of my map reduced", coordsReduced);
   }
 
-
-
   const handleMarkerClick = (e, id) => {
-    console.log("this is the handleClick for the marker", e, id)
+    console.log("this is the handleClick for the marker", e, id);
     const foundListing = listings.find((elem) => elem._id === id);
     // console.log(foundListing);
     setListingMap(foundListing);
     console.log(listingMap);
-  }
-
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -188,13 +181,18 @@ const Browse = () => {
           <form onSubmit={handleSearch}>
             <label htmlFor="search"></label>
             {/* <select id="search" onChange={(e) => setSearch(e.target.value)}> */}
-              {categories.map((category) => {
-                return (
-                  <button className="btn btn-active" key={category._id} value={category._id} onClick={(e) => setSearch(e.target.value)}>
-                    {category.name}
-                  </button>
-                );
-              })}
+            {categories.map((category) => {
+              return (
+                <button
+                  className="btn btn-active"
+                  key={category._id}
+                  value={category._id}
+                  onClick={(e) => setSearch(e.target.value)}
+                >
+                  {category.name}
+                </button>
+              );
+            })}
             {/* </select> */}
             <button type="submit">Search</button>
           </form>
@@ -222,15 +220,16 @@ const Browse = () => {
         </div>
       </div>
 
-      <div className="row">
+      <div className="d-flex justify-content-center">
         {mapOrList === "list" && (
-          <div className="col-12 d-flex justify-content-center">
+          <div className="d-flex-wrap justify-content-center">
             {listings.map((listing) => {
-              return (
-                <div key={listing._id}>
-                  <ListingCard listing={listing} />
-                </div>
-              );
+              if (!listing.archived)
+                return (
+                  <>
+                    <ListingCard key={listing._id} listing={listing} />
+                  </>
+                );
             })}
           </div>
         )}
@@ -239,8 +238,6 @@ const Browse = () => {
           <div className="col-12 d-inline-grid justify-content-center">
             <div className="row">
               <div className="col-8">
-
-
                 <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
                   <GoogleMap
                     mapContainerStyle={containerStyle}
@@ -251,18 +248,26 @@ const Browse = () => {
                       return (
                         <form key={i}>
                           <label htmlFor={listing.name}></label>
-                          <Marker position={{ lat: listing.coord?.lat || -34.397, lng: listing.coord?.lng || 150.644 }} onClick={(e) => handleMarkerClick(e, listing._id)} />
+                          <Marker
+                            position={{
+                              lat: listing.coord?.lat || -34.397,
+                              lng: listing.coord?.lng || 150.644,
+                            }}
+                            onClick={(e) => handleMarkerClick(e, listing._id)}
+                          />
                         </form>
-                      )
+                      );
                     })}
                   </GoogleMap>
                 </LoadScript>
               </div>
-              <div className="col-4"><p>The restaurant</p>
-              
-                {Object.entries(listingMap).length > 0 > 0 && (<ListingCard listing={listingMap}/>) }
-                </div>
-            
+              <div className="col-4">
+                <p>The restaurant</p>
+
+                {Object.entries(listingMap).length > 0 > 0 && (
+                  <ListingCard listing={listingMap} />
+                )}
+              </div>
             </div>
           </div>
         )}

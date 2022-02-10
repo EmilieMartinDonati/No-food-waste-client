@@ -9,14 +9,9 @@ const DescribeYourProducts = ({ setBusiness, setStep }) => {
   useEffect(() => {
     apiHandler
       .get("/api/category")
-      .then((dbRes) => {
-        console.log("dbRes.data line 13 >>>>>>>", dbRes.data);
-        setOptions(dbRes.data);
-      })
+      .then((dbRes) => setOptions(dbRes.data))
       .catch((err) => console.error(err));
   }, []);
-
-  console.log("Options >>> line 16", options);
 
   // This function will add very selected tag to the tags array
   const handleChange = (evt) => {

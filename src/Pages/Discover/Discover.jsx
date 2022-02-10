@@ -92,13 +92,12 @@ const Discover = () => {
     });
     // let isMounted = true;
     // if (isMounted) {
-      APIHandler
-        .get("/discover")
-        .then((dbRes) => {
-          console.log("this is db Res for allListings", dbRes);
-          setAllListings(dbRes.data);
-        })
-        .catch((err) => console.error(err));
+    APIHandler.get("/discover")
+      .then((dbRes) => {
+        console.log("this is db Res for allListings", dbRes);
+        setAllListings(dbRes.data);
+      })
+      .catch((err) => console.error(err));
     // }
     // return () => {
     //   isMounted = false;
@@ -136,11 +135,10 @@ const Discover = () => {
             </LoadScript>
           </div>
         </div>
-        <div className="row">
-          <div className="col-12 d-inline-flex">
-              
-              {allListings.map((listing) => {
-              return <ListingCard listing={listing} />;
+        <div className="d-flex-wrap justify-content-center">
+          <div id="listing-card-div-flex">
+            {allListings.map((listing) => {
+              if (!listing.archived) return <ListingCard listing={listing} />;
             })}
           </div>
         </div>
