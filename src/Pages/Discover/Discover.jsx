@@ -3,6 +3,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import ListingCard from "../../components/ListingCard";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import Geocode from "react-geocode";
+import APIHandler from "../../API/APIHandler";
 
 Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
 Geocode.setLanguage("fr");
@@ -91,8 +92,8 @@ const Discover = () => {
     });
     // let isMounted = true;
     // if (isMounted) {
-      axios
-        .get("http://localhost:4000/discover")
+      APIHandler
+        .get("/discover")
         .then((dbRes) => {
           console.log("this is db Res for allListings", dbRes);
           setAllListings(dbRes.data);

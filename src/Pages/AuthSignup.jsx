@@ -2,7 +2,6 @@
 // import useForm from "../Hooks/useForm";
 import { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
-// import axios from "axios";
 import apiHandler from "../api/apiHandler";
 
 const AuthSignup = ({ role }) => {

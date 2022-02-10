@@ -28,8 +28,8 @@ const Account = () => {
                 bookings.map((booking) => {
                     return (
                         <>
-
-                            <div className="card" style={{ width: "30rem" }}>
+                            <div className="d-sm-inline-flex">
+                            <div className="card" style={{ width: "auto" }}>
                                 <img
                                     className="card-img-top"
                                     src={booking.listing?.owner?.picture}
@@ -39,9 +39,10 @@ const Account = () => {
                                     <h5 className="card-title">Reserved quantity : {booking.quantity}</h5>
                                     <h5 className="card-text">Price: {booking.listing?.price}€</h5>
                                     <p className="card-text">{booking.listing?.owner?.address}</p>
-                                    <p className="card-text">Pick up by {booking.listing?.owner?.pickupTimeSlots}</p>
+                                    <p className="card-text">Pick up by {booking.listing?.owner?.endTimeSlot}</p>
                                     <Link to={`/account/bookings/${booking._id}`}>See this booking</Link>
                                 </div>
+                            </div>
                             </div>
                         </>
                     )

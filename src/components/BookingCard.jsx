@@ -30,7 +30,7 @@ const BookingCard = ({ booking }) => {
                     <h5 className="card-title">Reserved quantity : {booking.quantity}</h5>
                     <h5 className="card-text">Price: {booking.listing?.price}€</h5>
                     <p className="card-text">{booking.listing?.owner?.address}</p>
-                    <p className="card-text">Pick up by {booking.listing?.owner?.pickupTimeSlots}</p>
+                    <p className="card-text">Pick up by {booking.listing?.owner.endTimeSlot}</p>
                     <form onSubmit={cancelHandler}>
                         {/* <label htmlFor="booking"></label>
                                 <input type="text" id="booking" value={booking.quantity} style={{visibility: "hidden"}}/> */}

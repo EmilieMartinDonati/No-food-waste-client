@@ -91,10 +91,10 @@ const ListingCard = ({ listing }) => {
   };
 
   return (
-    <div className="card" style={{ width: "30rem" }}>
+    <div className="card" style={{ width: "auto" }}>
       <img
         className="card-img-top"
-        src={listing.owner.picture}
+        src={listing.owner?.picture}
         alt={listing.name}
       />
       <div className="card-body">
@@ -103,14 +103,14 @@ const ListingCard = ({ listing }) => {
         </p>
         <h5 className="card-title">{listing.name}</h5>
         <h5 className="card-text">Price: {listing.price}€</h5>
-        <p className="card-text">{listing.owner.name}</p>
+        <p className="card-text">{listing.owner?.name}</p>
         <FontAwesomeIcon
           style={{ cursor: "pointer" }}
           onClick={toggleFavorite}
           icon={favIcon}
           size="xs"
         />
-        <p className="card-text">Pick up by {listing.owner.pickupTimeSlots}</p>
+        <p className="card-text">Pick up by {listing.owner?.endTimeSlot}</p>
         <p>{listing.availableQuantity}</p>
         <Link to={`/listing/${listing._id}`}>See this offer</Link>
       </div>

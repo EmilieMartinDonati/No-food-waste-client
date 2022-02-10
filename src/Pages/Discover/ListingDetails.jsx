@@ -59,31 +59,46 @@ const ListingDetails = () => {
  
     return (
         <>
+        <div className="container">
+        <div className="row">
+        <div className="col-6">
             <h1>Listing details</h1>
             {listing.name && (
                 <ListingCard listing={listing} />
             )}
-            <p>
-                <button onClick={visibilityHandler} className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            </div>
+            
+            <div className="col-6">
+                <button onClick={visibilityHandler} className="btn btn-primary px-5 py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     BOOK THIS MEAL
                 </button>
-            </p>
             <div className="collapse" id="collapseExample" ref={elementRef}>
                 <div className="card card-body">
-                    <form onSubmit={submitHandler}>
+                
+                                
+                    <form onSubmit={submitHandler} className="p-4">
+                    <div className="form-group m-3">
                     <label htmlFor="label" className="card-title">Quantity</label>
+                    </div>
+                    <div className="form-group m-3">
                     <input type="number" id="label" min="1" max={listing.availableQuantity} onChange={(e) => setQuantity(e.target.value)}/>
-
+                    </div>
+                    <div className="form-group m-3">
                     <label htmlFor="payment">PAYMENT</label>
+                    </div>
+                    <div className="form-group m-3">
                     <select id="payment" onChange={(e) => setPayment(e.target.value)}>
                         <option id="VISA">VISA</option>
                         <option id="MASTERCARD">MASTERCARD</option>
                         <option id="PAYPAL">PAYPAL</option>
                     </select>
-
-                        <button>CONCLUDE BOOKING</button>
+                    </div>
+                        <button className="btn btn-primary px-5 py-2">CONCLUDE BOOKING</button>
                     </form>
                 </div>
+            </div>
+            </div>
+            </div>
             </div>
         </>
     )
