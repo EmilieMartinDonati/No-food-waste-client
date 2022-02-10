@@ -187,7 +187,6 @@ const Browse = () => {
         <div className="col-12">
           <form onSubmit={handleSearch}>
             <label htmlFor="search"></label>
-            {/* <select id="search" onChange={(e) => setSearch(e.target.value)}> */}
               {categories.map((category) => {
                 return (
                   <button className="btn btn-active" key={category._id} value={category._id} onClick={(e) => setSearch(e.target.value)}>
@@ -195,8 +194,7 @@ const Browse = () => {
                   </button>
                 );
               })}
-            {/* </select> */}
-            <button type="submit">Search</button>
+            {/* <button type="submit">Search</button> */}
           </form>
         </div>
       </div>
