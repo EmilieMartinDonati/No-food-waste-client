@@ -3,27 +3,38 @@ import apiHandler from "../../api/apiHandler";
 import ListingCard from "../../components/ListingCard";
 import { NavLink } from "react-router-dom";
 import Geocode from "react-geocode";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
 Geocode.setLanguage("fr");
 
 const Browse = () => {
+  // this is for the user.
   const [latitudeUser, setLatitudeUser] = useState(0);
   const [longitudeUser, setLongitudeUser] = useState(0);
+
+
   const [listings, setListings] = useState([]);
   const [userAddress, setUserAddress] = useState("");
   const [mapOrList, setMapOrList] = useState("list");
-  // const [latitude, setLatitude] = useState(0);
-  // const [longitude, setLongitude] = useState(0);
+  const [allLat, setAllLat] = useState([]);
+  const [allLong, setAllLong] = useState([]);
+  const [theCenter, setTheCenter] = useState(0);
+  const [listingMap, setListingMap] = useState([])
 
   const [search, setSearch] = useState("");
   const [categories, setCategories] = useState([]);
 
   const containerStyle = {
-    width: "300px",
-    height: "300px",
+    width: "700px",
+    height: "100vh",
     marginLeft: "3%",
+    className: "img-responsive"
+  };
+
+  const center = {
+    lat: latitudeUser,
+    lng: longitudeUser,
   };
 
   // The code below is a parser that should work for adresses for most countries.
@@ -81,6 +92,8 @@ const Browse = () => {
       .catch((e) => console.log(e));
   }, []);
 
+  // This is where it needs to move on.
+
   useEffect(() => {
     initLocalisations();
   }, [listings]);
@@ -114,7 +127,32 @@ const Browse = () => {
     }
   };
 
-  // console.log("listings, I hope they have the coordinates", listings);
+  console.log("listings, I hope they have the coordinates", listings);
+
+
+
+  if (listings.length > 1) {
+    const coordsReduced =
+      listings.reduce(function (a, b) {
+        console.log("console inside the reduce", a, b);
+        return {
+          lat: a.coord?.lat + b.coord?.lat,
+          lng: a.coord?.lng + b.coord?.lng
+        }
+      });
+    // console.log("this is the result of my map reduced", coordsReduced);
+  }
+
+
+
+  const handleMarkerClick = (e, id) => {
+    console.log("this is the handleClick for the marker", e, id)
+    const foundListing = listings.find((elem) => elem._id === id);
+    // console.log(foundListing);
+    setListingMap(foundListing);
+    console.log(listingMap);
+  }
+
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -128,16 +166,13 @@ const Browse = () => {
           "this is the response for the cat line 133",
           res.data.listings
         );
-          setListings(res.data.listings);
+        setListings(res.data.listings);
       })
       .catch((e) => console.log(e));
-    // apiHandler.post("/categories", data)
-    // .then((dbRes) => console.log(dbRes))
-    // .catch((e) => console.log(e))
   };
 
   return (
-    <div className="container ">
+    <div className="container">
       <div className="row">
         <div className="col-12">
           <h1 className="text-center text-danger">BROWSE</h1>
@@ -152,16 +187,15 @@ const Browse = () => {
         <div className="col-12">
           <form onSubmit={handleSearch}>
             <label htmlFor="search"></label>
-            <select id="search" onChange={(e) => setSearch(e.target.value)}>
+            {/* <select id="search" onChange={(e) => setSearch(e.target.value)}> */}
               {categories.map((category) => {
-                console.log(category);
                 return (
-                  <option key={category._id} value={category._id}>
+                  <button className="btn btn-active" key={category._id} value={category._id} onClick={(e) => setSearch(e.target.value)}>
                     {category.name}
-                  </option>
+                  </button>
                 );
               })}
-            </select>
+            {/* </select> */}
             <button type="submit">Search</button>
           </form>
         </div>
@@ -190,7 +224,7 @@ const Browse = () => {
 
       <div className="row">
         {mapOrList === "list" && (
-          <div className="col-12 d-inline-flex justify-content-center">
+          <div className="col-12 d-flex justify-content-center">
             {listings.map((listing) => {
               return (
                 <div key={listing._id}>
@@ -203,28 +237,33 @@ const Browse = () => {
 
         {mapOrList === "map" && (
           <div className="col-12 d-inline-grid justify-content-center">
-            <p className="text-uppercase">See on card</p>
-            {listings.map((listing) => {
-              const center = {
-                lat: listing.coord?.lat,
-                lng: listing.coord?.lng,
-              };
-              return (
-                <>
-                  <h4>{listing.name}</h4>
-                  <p>{listing.owner.address}</p>
-                  <p>{listing.coord?.lat}</p>
-                  <p>{listing.coord?.lng}</p>
-                  <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
-                    <GoogleMap
-                      mapContainerStyle={containerStyle}
-                      center={center}
-                      zoom={20}
-                    ></GoogleMap>
-                  </LoadScript>
-                </>
-              );
-            })}
+            <div className="row">
+              <div className="col-8">
+
+
+                <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
+                  <GoogleMap
+                    mapContainerStyle={containerStyle}
+                    center={center}
+                    zoom={8}
+                  >
+                    {listings.map((listing, i) => {
+                      return (
+                        <form key={i}>
+                          <label htmlFor={listing.name}></label>
+                          <Marker position={{ lat: listing.coord?.lat || -34.397, lng: listing.coord?.lng || 150.644 }} onClick={(e) => handleMarkerClick(e, listing._id)} />
+                        </form>
+                      )
+                    })}
+                  </GoogleMap>
+                </LoadScript>
+              </div>
+              <div className="col-4"><p>The restaurant</p>
+              
+                {Object.entries(listingMap).length > 0 > 0 && (<ListingCard listing={listingMap}/>) }
+                </div>
+            
+            </div>
           </div>
         )}
       </div>
