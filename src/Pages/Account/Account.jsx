@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import APIHandler from "../../API/APIHandler";
 import { Link } from "react-router-dom";
 import BookingCard from "../../components/BookingCard.jsx";
+import moment from "moment";
 
 const Account = () => {
   const [user, setUser] = useState({});
@@ -49,7 +50,7 @@ const Account = () => {
             user.bookings.map((booking) => {
               return (
                 <>
-                  <div className="card" style={{ width: "30rem" }}>
+                  <div className="card" style={{ width: "auto" }}>
                     <img
                       className="card-img-top"
                       src={booking.listing?.owner?.picture}
@@ -60,13 +61,13 @@ const Account = () => {
                         Reserved quantity : {booking.quantity}
                       </h5>
                       <h5 className="card-text">
-                        Price: {booking.listing?.price}€
+                        Price: {booking.listing?.price * booking.quantity}€
                       </h5>
                       <p className="card-text">
                         {booking.listing?.owner?.address}
                       </p>
                       <p className="card-text">
-                        Pick up by {booking.listing?.owner?.pickupTimeSlots}
+                        Pick up by {moment(booking.listing.owner?.endTimeSlot).format("ddd, hA")}
                       </p>
                       <Link to={`/account/bookings/${booking._id}`}>
                         See this booking

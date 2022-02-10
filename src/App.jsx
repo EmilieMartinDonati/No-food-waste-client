@@ -36,7 +36,7 @@ function App() {
         {/* <Route path="/testTimeSlot" element={<TimeSlots />} /> */}
         <Route element={<PrivateRoute />}>
           <Route path="/discover" element={<Discover />} />
-          <Route path="/category" />
+          {/* <Route path="/category" /> */}
           <Route path="/account" element={<Account />} />
           <Route path="/account/bookings/:id" element={<OneBooking />} />
           {/* <Route path="/account/bookings/delete/:id" /> */}

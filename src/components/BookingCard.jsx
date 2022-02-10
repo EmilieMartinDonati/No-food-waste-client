@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import apiHandler from "../API/APIHandler";
+import moment from "moment";
 
 const BookingCard = ({ booking }) => {
    const navigate = useNavigate()
@@ -28,9 +29,10 @@ const BookingCard = ({ booking }) => {
                 />
                 <div className="card-body">
                     <h5 className="card-title">Reserved quantity : {booking.quantity}</h5>
-                    <h5 className="card-text">Price: {booking.listing?.price}€</h5>
+                    <h5 className="card-text">Price: {booking.listing?.price * booking.quantity}€</h5>
                     <p className="card-text">{booking.listing?.owner?.address}</p>
-                    <p className="card-text">Pick up by {booking.listing?.owner.endTimeSlot}</p>
+                    <p className="card-text">Pick up by {moment(booking.listing.owner?.endTimeSlot).format("ddd, hA")}</p>
+                    
                     <form onSubmit={cancelHandler}>
                         {/* <label htmlFor="booking"></label>
                                 <input type="text" id="booking" value={booking.quantity} style={{visibility: "hidden"}}/> */}

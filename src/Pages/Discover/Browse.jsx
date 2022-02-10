@@ -12,24 +12,24 @@ const Browse = () => {
   // this is for the user.
   const [latitudeUser, setLatitudeUser] = useState(0);
   const [longitudeUser, setLongitudeUser] = useState(0);
+  // const [colors, setColors] = useState([]);
 
 
   const [listings, setListings] = useState([]);
   const [userAddress, setUserAddress] = useState("");
   const [mapOrList, setMapOrList] = useState("list");
-  const [allLat, setAllLat] = useState([]);
-  const [allLong, setAllLong] = useState([]);
-  const [theCenter, setTheCenter] = useState(0);
+  // const [allLat, setAllLat] = useState([]);
+  // const [allLong, setAllLong] = useState([]);
+  // const [theCenter, setTheCenter] = useState(0);
   const [listingMap, setListingMap] = useState([])
 
   const [search, setSearch] = useState("");
   const [categories, setCategories] = useState([]);
 
   const containerStyle = {
-    width: "700px",
+    width: "auto",
     height: "100vh",
-    marginLeft: "3%",
-    className: "img-responsive"
+    className: "container-fluid"
   };
 
   const center = {
@@ -71,28 +71,27 @@ const Browse = () => {
   );
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      console.log("Available");
-    } else {
-      console.log("Not Available");
-    }
+    
     navigator.geolocation.getCurrentPosition(function (position) {
       console.log("Latitude is :", position.coords.latitude);
       setLatitudeUser(position.coords.latitude);
       console.log("Longitude is :", position.coords.longitude);
       setLongitudeUser(position.coords.longitude);
     });
+    // Color logic
+    
     apiHandler
       .get("/listings")
       .then((res) => {
         console.log("this is the res from the db line 77", res);
         setListings(res.data.listings);
         setCategories(res.data.categories);
-      })
+        })
       .catch((e) => console.log(e));
   }, []);
 
   // This is where it needs to move on.
+  
 
   useEffect(() => {
     initLocalisations();
@@ -131,19 +130,7 @@ const Browse = () => {
 
 
 
-  if (listings.length > 1) {
-    const coordsReduced =
-      listings.reduce(function (a, b) {
-        console.log("console inside the reduce", a, b);
-        return {
-          lat: a.coord?.lat + b.coord?.lat,
-          lng: a.coord?.lng + b.coord?.lng
-        }
-      });
-    // console.log("this is the result of my map reduced", coordsReduced);
-  }
-
-
+  
 
   const handleMarkerClick = (e, id) => {
     console.log("this is the handleClick for the marker", e, id)
@@ -187,14 +174,13 @@ const Browse = () => {
         <div className="col-12">
           <form onSubmit={handleSearch}>
             <label htmlFor="search"></label>
-              {categories.map((category) => {
+              {categories.map((category, i) => {
                 return (
-                  <button className="btn btn-active" key={category._id} value={category._id} onClick={(e) => setSearch(e.target.value)}>
+                  <button className="btn btn-active m-2 p-3" key={category._id} value={category._id} onClick={(e) => setSearch(e.target.value)} style={{backgroundColor: category.color}}>
                     {category.name}
                   </button>
                 );
               })}
-            {/* <button type="submit">Search</button> */}
           </form>
         </div>
       </div>
@@ -243,7 +229,7 @@ const Browse = () => {
                   <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={center}
-                    zoom={8}
+                    zoom={10}
                   >
                     {listings.map((listing, i) => {
                       return (
@@ -256,7 +242,7 @@ const Browse = () => {
                   </GoogleMap>
                 </LoadScript>
               </div>
-              <div className="col-4"><p>The restaurant</p>
+              <div className="col-4">
               
                 {Object.entries(listingMap).length > 0 > 0 && (<ListingCard listing={listingMap}/>) }
                 </div>

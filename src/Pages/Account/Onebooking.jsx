@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import apiHandler from '../../API/APIHandler';
 import Geocode from "react-geocode";
 import { GoogleMap, LoadScript, LoadScriptNext } from '@react-google-maps/api';
@@ -19,8 +19,9 @@ const OneBooking = () => {
     const [coord, setCoord] = useState({});
 
     const containerStyle = {
-        width: "700px",
-        height: "700px"
+        width: "auto",
+        height: "100vh",
+        className: "container-fluid"
     }
 
 
@@ -78,30 +79,42 @@ const OneBooking = () => {
 
 
     return (
-        <>
-            {booking && (
-                <>
 
-                   <BookingCard booking={booking}/>
-                
 
-                    <LoadScript
-                        googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk"
-                    >
-                        <GoogleMap
-                            mapContainerStyle={containerStyle}
-                            center={{
-                                lat: coord?.lat || 45,
-                                lng: coord?.lng || 50
-                            }
-                            }
-                            zoom={20}
+
+            <div className="container">
+            { booking && (
+                <div className="row">
+                    <div className="col-6">
+                        <BookingCard booking={booking} />
+                    </div>
+                    <div className="col-6">
+                        <LoadScript
+                            googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk"
                         >
-                        </GoogleMap>
-                    </LoadScript>
-                </>
-            )}
-        </>
+                            <GoogleMap
+                                mapContainerStyle={containerStyle}
+                                center={{
+                                    lat: coord?.lat || 45,
+                                    lng: coord?.lng || 50
+                                }
+                                }
+                                zoom={20}
+                            >
+                            </GoogleMap>
+                        </LoadScript>
+                    </div>
+                </div>
+                )}
+            </div>
+
+
+
+
+
+
+       
+        
     )
 }
 
