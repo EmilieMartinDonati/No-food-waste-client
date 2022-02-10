@@ -179,6 +179,7 @@ const Browse = () => {
                 </button>
               );
             })}
+            <button>Search</button>
           </form>
         </div>
       </div>
