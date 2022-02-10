@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartFull } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../context/UseAuth";
+import moment from "moment";
 
 const ListingCard = ({ listing }) => {
   const [favIcon, setFavIcon] = useState(faHeart);
@@ -14,7 +15,7 @@ const ListingCard = ({ listing }) => {
 
   // Toggle visually the favorite icon depending on whether the CU has the business in its fav array
   useEffect(() => {
-    currentUser.favorites.includes(listing.owner._id)
+    currentUser.favorites?.includes(listing?.owner?._id)
       ? setFavIcon(faHeartFull)
       : setFavIcon(faHeart);
   }, [currentUser]);
@@ -118,8 +119,8 @@ const ListingCard = ({ listing }) => {
           icon={favIcon}
           size="xs"
         />
-        <p className="card-text">Pick up by {listing.owner?.endTimeSlot}</p>
-        <p>{listing.availableQuantity}</p>
+        <p className="card-text">Pick up by {moment(listing.owner?.endTimeSlot).format("ddd, hA")}</p>
+        <p>Available quantity : {listing.availableQuantity}</p>
         <Link to={`/listing/${listing._id}`}>See this offer</Link>
       </div>
     </div>

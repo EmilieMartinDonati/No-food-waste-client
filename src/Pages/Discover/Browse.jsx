@@ -12,23 +12,23 @@ const Browse = () => {
   // this is for the user.
   const [latitudeUser, setLatitudeUser] = useState(0);
   const [longitudeUser, setLongitudeUser] = useState(0);
+  // const [colors, setColors] = useState([]);
 
   const [listings, setListings] = useState([]);
   const [userAddress, setUserAddress] = useState("");
   const [mapOrList, setMapOrList] = useState("list");
-  const [allLat, setAllLat] = useState([]);
-  const [allLong, setAllLong] = useState([]);
-  const [theCenter, setTheCenter] = useState(0);
+  // const [allLat, setAllLat] = useState([]);
+  // const [allLong, setAllLong] = useState([]);
+  // const [theCenter, setTheCenter] = useState(0);
   const [listingMap, setListingMap] = useState([]);
 
   const [search, setSearch] = useState("");
   const [categories, setCategories] = useState([]);
 
   const containerStyle = {
-    width: "700px",
+    width: "auto",
     height: "100vh",
-    marginLeft: "3%",
-    className: "img-responsive",
+    className: "container-fluid",
   };
 
   const center = {
@@ -70,17 +70,14 @@ const Browse = () => {
   );
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      console.log("Available");
-    } else {
-      console.log("Not Available");
-    }
     navigator.geolocation.getCurrentPosition(function (position) {
       console.log("Latitude is :", position.coords.latitude);
       setLatitudeUser(position.coords.latitude);
       console.log("Longitude is :", position.coords.longitude);
       setLongitudeUser(position.coords.longitude);
     });
+    // Color logic
+
     apiHandler
       .get("/listings")
       .then((res) => {
@@ -128,17 +125,6 @@ const Browse = () => {
 
   console.log("listings, I hope they have the coordinates", listings);
 
-  if (listings.length > 1) {
-    const coordsReduced = listings.reduce(function (a, b) {
-      console.log("console inside the reduce", a, b);
-      return {
-        lat: a.coord?.lat + b.coord?.lat,
-        lng: a.coord?.lng + b.coord?.lng,
-      };
-    });
-    // console.log("this is the result of my map reduced", coordsReduced);
-  }
-
   const handleMarkerClick = (e, id) => {
     console.log("this is the handleClick for the marker", e, id);
     const foundListing = listings.find((elem) => elem._id === id);
@@ -180,21 +166,19 @@ const Browse = () => {
         <div className="col-12">
           <form onSubmit={handleSearch}>
             <label htmlFor="search"></label>
-            {/* <select id="search" onChange={(e) => setSearch(e.target.value)}> */}
-            {categories.map((category) => {
+            {categories.map((category, i) => {
               return (
                 <button
-                  className="btn btn-active"
+                  className="btn btn-active m-2 p-3"
                   key={category._id}
                   value={category._id}
                   onClick={(e) => setSearch(e.target.value)}
+                  style={{ backgroundColor: category.color }}
                 >
                   {category.name}
                 </button>
               );
             })}
-            {/* </select> */}
-            <button type="submit">Search</button>
           </form>
         </div>
       </div>
@@ -242,7 +226,7 @@ const Browse = () => {
                   <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={center}
-                    zoom={8}
+                    zoom={10}
                   >
                     {listings.map((listing, i) => {
                       return (
@@ -262,8 +246,6 @@ const Browse = () => {
                 </LoadScript>
               </div>
               <div className="col-4">
-                <p>The restaurant</p>
-
                 {Object.entries(listingMap).length > 0 > 0 && (
                   <ListingCard listing={listingMap} />
                 )}
