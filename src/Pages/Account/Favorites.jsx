@@ -107,7 +107,7 @@ const Favorites = () => {
 
                             <>
                                 <div className="col-6">
-                                    <div className="card" style={{ width: "auto", margin: "2%", borderRadius: "10px", color: "#FFF5C0", backgroundColor: "#FF4646" }}>
+                                    <div className="card" style={{ width: "auto", margin: "2%", borderRadius: "10px", color: "#FFF5C0", backgroundColor: "#E97171" }}>
                                         <img
                                             className="img-responsive"
                                             src={elem.picture}
