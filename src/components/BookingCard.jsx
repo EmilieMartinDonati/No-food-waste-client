@@ -21,22 +21,36 @@ const BookingCard = ({ booking }) => {
 
     return (
         <>
-            <div className="card" style={{ width: "30rem" }}>
+            <div className="card background" style={{ width: "30rem", backgroundColor: "#FFB396", height: "100vh" }}>
                 <img
                     className="card-img-top"
                     src={booking.listing?.owner?.picture}
                     alt={booking.listing?.name}
                 />
                 <div className="card-body">
+                <div className="row">
+                <div className="col-6">
                     <h5 className="card-title">Reserved quantity : {booking.quantity}</h5>
+                    </div>
+                    <div className="col-6">
                     <h5 className="card-text">Price: {booking.listing?.price * booking.quantity}€</h5>
+                    </div>
+                    <hr></hr>
+                    </div>
+                    <div className="row">
+                    <div className="col-6">
                     <p className="card-text">{booking.listing?.owner?.address}</p>
+                    </div>
+                    <div className="col-6">
                     <p className="card-text">Pick up by {moment(booking.listing.owner?.endTimeSlot).format("ddd, hA")}</p>
+                    </div>
+                    </div>
+                    <hr></hr>
                     
                     <form onSubmit={cancelHandler}>
                         {/* <label htmlFor="booking"></label>
                                 <input type="text" id="booking" value={booking.quantity} style={{visibility: "hidden"}}/> */}
-                        <button>Cancel booking</button>
+                        <button className="p-4 text-white"  style={{backgroundColor: "#FF4646"}}>Cancel booking</button>
                     </form>
                 </div>
             </div>

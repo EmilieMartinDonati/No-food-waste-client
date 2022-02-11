@@ -17,10 +17,10 @@ const Browse = () => {
   const [listings, setListings] = useState([]);
   const [userAddress, setUserAddress] = useState("");
   const [mapOrList, setMapOrList] = useState("list");
-  // const [allLat, setAllLat] = useState([]);
-  // const [allLong, setAllLong] = useState([]);
-  // const [theCenter, setTheCenter] = useState(0);
   const [listingMap, setListingMap] = useState([]);
+  const [businesses, setBusinesses] = useState([]);
+
+  // Fetch all businesses, filter par catégories, display their listings.
 
   const [search, setSearch] = useState("");
   const [categories, setCategories] = useState([]);
@@ -81,14 +81,29 @@ const Browse = () => {
     apiHandler
       .get("/listings")
       .then((res) => {
-        console.log("this is the res from the db line 77", res);
+        console.log("this is the res from the db line 77", res.data.businesses);
         setListings(res.data.listings);
         setCategories(res.data.categories);
+        setBusinesses(res.data.businesses);
       })
       .catch((e) => console.log(e));
   }, []);
 
   // This is where it needs to move on.
+
+  const handleAll = () => {
+    try {
+      apiHandler
+        .get("/listings")
+        .then((res) => {
+          console.log("this is the res from the db line 77", res.data.businesses);
+          setListings(res.data.listings);
+        })
+    }
+    catch (e) {
+      next(e)
+    }
+  }
 
   useEffect(() => {
     initLocalisations();
@@ -125,16 +140,23 @@ const Browse = () => {
 
   console.log("listings, I hope they have the coordinates", listings);
 
-  const handleMarkerClick = (e, id) => {
+  const handleMarkerClick = (e, id, businessId) => {
     console.log("this is the handleClick for the marker", e, id);
-    const foundListing = listings.find((elem) => elem._id === id);
-    // console.log(foundListing);
-    setListingMap(foundListing);
-    console.log(listingMap);
+    console.log(businessId);
+    const foundBusiness = businesses.find((elem) => elem._id === businessId);
+    console.log(businesses);
+    console.log(foundBusiness);
+    setListingMap(foundBusiness.listings);
+    console.log("those are the listings", listingMap);
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
+    // listingMap.map((elem, index, array) => {
+    //   if (elem.owner.tags.find((el._id) => el._id === search)) {
+
+    //   }
+    // })
     const data = {
       search: search,
     };
@@ -147,6 +169,11 @@ const Browse = () => {
           res.data
         );
         setListings(res.data.listings);
+        // const filteredListings = []
+        // if (listingMap.length > 0) {
+        //   filteredListings = listingMap.filter((listing) === (listing.owner.tags.find(search) === true))
+        // }
+        // console.log("this is line 162", filteredListings);
       })
       .catch((e) => console.log(e));
   };
@@ -155,7 +182,7 @@ const Browse = () => {
     <div className="container-fluid pt-3 background">
       <div className="row">
         <div className="col-12">
-          <h1 className="text-center text-bold" style={{color: "purple"}}>BROWSE</h1>
+          <h1 className="text-center text-bold" style={{ color: "purple" }}>BROWSE</h1>
           <p>
             Offers near{" "}
             <span style={{ color: "slategrey" }}>{userAddress}</span>
@@ -180,16 +207,19 @@ const Browse = () => {
                 </button>
               );
             })}
-            {/* <button>Search</button> */}
+            <button className="btn btn-active m-2 p-5 text-bold text-uppercase" style={{
+              backgroundColor:
+                "#FFB396"
+            }} onClick={handleAll}>All</button>
           </form>
         </div>
       </div>
 
-      <div className="row inline-flex-center" style={{color: "silver"}}>
+      <div className="row inline-flex-center" style={{ color: "silver" }}>
         <div className="col-6">
           <button
             className="btn"
-            style={{color: "silver"}}
+            style={{ color: "silver" }}
             value="list"
             onClick={(e) => setMapOrList(e.target.value)}
           >
@@ -200,7 +230,7 @@ const Browse = () => {
           <button
             className="btn btn-block"
             value="map"
-            style={{color: "silver"}}
+            style={{ color: "silver" }}
             onClick={(e) => setMapOrList(e.target.value)}
           >
             MAP
@@ -230,7 +260,7 @@ const Browse = () => {
                   <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={center}
-                    zoom={10}
+                    zoom={14}
                   >
                     {listings.map((listing, i) => {
                       return (
@@ -241,7 +271,7 @@ const Browse = () => {
                               lat: listing.coord?.lat || -34.397,
                               lng: listing.coord?.lng || 150.644,
                             }}
-                            onClick={(e) => handleMarkerClick(e, listing._id)}
+                            onClick={(e) => handleMarkerClick(e, listing._id, listing.owner._id)}
                           />
                         </form>
                       );
@@ -251,7 +281,9 @@ const Browse = () => {
               </div>
               <div className="col-4">
                 {Object.entries(listingMap).length > 0 > 0 && (
-                  <ListingCard listing={listingMap} />
+                  listingMap.map((listing) => {
+                    return (<ListingCard listing={listing} />)
+                  })
                 )}
               </div>
             </div>

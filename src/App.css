@@ -94,5 +94,6 @@ button {
 }
 
 .background {
-  background-color: "#FFF5C0" !important;
+  background-color: #fff5c0;
+  min-height: 100vh;
 }

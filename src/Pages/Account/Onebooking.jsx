@@ -80,12 +80,10 @@ const OneBooking = () => {
 
     return (
 
-
-
-            <div className="container">
+            <div className="container-fluid background">
             { booking && (
-                <div className="row">
-                    <div className="col-6">
+                <div className="row background">
+                    <div className="col-6 background">
                         <BookingCard booking={booking} />
                     </div>
                     <div className="col-6">
