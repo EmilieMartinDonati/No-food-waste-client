@@ -257,7 +257,7 @@ const Browse = () => {
         {mapOrList === "map" && (
           <div className="col-12 d-inline-grid justify-content-center">
             <div className="row">
-              <div className="col-12">
+              <div className="col-8">
                 <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
                   <GoogleMap
                     mapContainerStyle={containerStyle}
