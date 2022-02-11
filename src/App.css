@@ -3,11 +3,9 @@
 .App {
   text-align: center;
   /* font-family: "Quicksand", sans-serif; */
-    font-size: 80%;
-    font-size: 15px;
+  font-size: 80%;
+  font-size: 15px;
 }
-
-
 
 .App-logo {
   height: 40vmin;
@@ -64,7 +62,7 @@ button {
 }
 
 .gray-listing {
-  color: lightgray;
+  color: GRAY;
 }
 
 .topLink {
@@ -79,20 +77,19 @@ button {
 #buttonReview {
   background-color: black;
   opacity: 0.7em !important;
-  color: white
-  ;
+  color: white;
   font-weight: bold;
 }
 
 #buttonReview:hover {
-  color: purple
-  ;
+  color: purple;
 }
 
 .yo {
-  color: #f5bcc9
+  color: #f5bcc9;
 }
 
 .background {
-  background-color: "#FFF5C0" !important;
+  background-color: #fff5c0;
+  min-height: 100vh;
 }

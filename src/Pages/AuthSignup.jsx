@@ -62,7 +62,12 @@ const AuthSignup = ({ role }) => {
             required
           />
         </div>
-        <button className="btn btn-primary px-5 py-2">SIGN UP</button>
+        <button
+          className="btn btn-primary px-5 py-2"
+          style={{ backgroundColor: "#FF4646", border: 0 }}
+        >
+          SIGN UP
+        </button>
       </form>
       <NavLink to="/login" role={role}>
         <h3>Already registered ? Log in</h3>

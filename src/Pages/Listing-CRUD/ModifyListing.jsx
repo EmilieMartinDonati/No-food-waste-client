@@ -146,7 +146,10 @@ const ModifyListing = () => {
         <label className="mx-4">Active</label>
       </div>
       <div className="py-3">
-        <button className="btn btn-primary px-5 py-2">
+        <button
+          style={{ backgroundColor: "#FF4646", border: 0 }}
+          className="btn btn-primary px-5 py-2"
+        >
           Modify the listing
         </button>
       </div>

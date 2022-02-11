@@ -93,35 +93,69 @@ const ListingCard = ({ listing }) => {
 
   return (
     <div
-      className="card my-3  p-3 m-3"
+      className="card my-3 p-3 mx-5"
       style={{
-        minWidth: "300px",
-        maxWidth: "25vw",
+        width: "325px",
         borderRadius: "10px",
-        backgroundColor: 	"#f2cc6f",
+        // border: "1px solid #FF4646",
+        borderShadow: "10px",
+        backgroundColor: "#FFB396",
       }}
     >
-      <img
-        className="card-img-top"
-        style={{ height: 200 }}
-        src={listing.owner?.picture}
-        alt={listing.name}
-      />
-      <div className="card-body text-uppercase text-justify text-dark">
-        <p style={{ backgroundColor: tagColor, color: "white", borderRadius: "5px", padding: "2%" }}>
+      <div style={{ position: "relative" }}>
+        <img
+          className="card-img-top"
+          style={{ height: 200 }}
+          src={listing.owner?.picture}
+          alt={listing.name}
+        />
+        <p
+          style={{
+            backgroundColor: tagColor,
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            color: "white",
+            borderRadius: "5px",
+            padding: "2%",
+          }}
+        >
           {displayTag}
         </p>
-        <div className="row"><div className="col-8"><h5 className="card-title">{listing.name}</h5></div><div className="col-4"><h5 className="card-text" style={{color: "black"}}>{listing.price}€</h5></div></div>
-        <div className="row"><div className="col-8"><h6 className="card-text text-dark">{listing.owner?.name}</h6></div><div className="col-4"><FontAwesomeIcon
-          style={{ cursor: "pointer" }}
-          onClick={toggleFavorite}
-          icon={favIcon}
-          size="s"
-          style={{color: "red"}}
-        /></div></div>
-        <hr></hr>
-        
-        <p className="card-text text-dark">Pick up by <span className="text-danger text-xl">{moment(listing.owner?.endTimeSlot).format("ddd, hA")}</span></p>
+      </div>
+      <div className="card-body text-uppercase text-justify text-dark">
+        <div className="row">
+          <div className="col-12">
+            <h4 className="card-title">{listing.name}</h4>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-8">
+            <h6 className="card-text text-dark">{listing.owner?.name}</h6>
+          </div>
+          <div className="col-4">
+            <h5 className="card-text" style={{ color: "black" }}>
+              {listing.price}€
+            </h5>
+          </div>
+          {/* <div className="col-4"> */}
+          <div style={{ position: "absolute", top: "30px", left: "120px" }}>
+            <FontAwesomeIcon
+              style={{ cursor: "pointer", color: "#FF4646" }}
+              onClick={toggleFavorite}
+              icon={favIcon}
+              size="xl"
+            />
+          </div>
+        </div>
+        <hr style={{ color: "#FF4646", height: "1px" }} />
+
+        <p className="card-text text-dark">
+          Pick up by{" "}
+          <span className="text-danger text-xl">
+            {moment(listing.owner?.endTimeSlot).format("ddd, hA")}
+          </span>
+        </p>
         <p>Available quantity : {listing.availableQuantity}</p>
         <Link to={`/listing/${listing._id}`}>SEE</Link>
       </div>

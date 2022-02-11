@@ -26,8 +26,8 @@ const Browse = () => {
   const [categories, setCategories] = useState([]);
 
   const containerStyle = {
-    width: "auto",
-    height: "100vh",
+    width: "60vw",
+    height: "60vh",
     className: "container-fluid",
   };
 
@@ -142,10 +142,7 @@ const Browse = () => {
     apiHandler
       .post("/category", data)
       .then((res) => {
-        console.log(
-          "this is the response for the cat line 133",
-          res.data
-        );
+        console.log("this is the response for the cat line 133", res.data);
         setListings(res.data.listings);
       })
       .catch((e) => console.log(e));
@@ -155,7 +152,12 @@ const Browse = () => {
     <div className="container-fluid pt-3 background">
       <div className="row">
         <div className="col-12">
-          <h1 className="text-center text-bold" style={{color: "purple"}}>BROWSE</h1>
+          <h1
+            className="text-center text-bold p-5"
+            style={{ color: "#FF4646" }}
+          >
+            Find all our listings
+          </h1>
           <p>
             Offers near{" "}
             <span style={{ color: "slategrey" }}>{userAddress}</span>
@@ -185,11 +187,11 @@ const Browse = () => {
         </div>
       </div>
 
-      <div className="row inline-flex-center" style={{color: "silver"}}>
+      <div className="row inline-flex-center" style={{ color: "silver" }}>
         <div className="col-6">
           <button
-            className="btn"
-            style={{color: "silver"}}
+            className="btn btn-primary px-5 py-2 m-5"
+            style={{ backgroundColor: "#FF4646", border: 0 }}
             value="list"
             onClick={(e) => setMapOrList(e.target.value)}
           >
@@ -198,9 +200,9 @@ const Browse = () => {
         </div>
         <div className="col-6">
           <button
-            className="btn btn-block"
+            className="btn btn-primary px-5 py- m-5"
+            style={{ backgroundColor: "#FF4646", border: 0 }}
             value="map"
-            style={{color: "silver"}}
             onClick={(e) => setMapOrList(e.target.value)}
           >
             MAP
@@ -208,9 +210,9 @@ const Browse = () => {
         </div>
       </div>
 
-      <div className="d-flex justify-content-center">
+      <div className="d-flex-wrap justify-content-center">
         {mapOrList === "list" && (
-          <div className="d-flex-wrap justify-content-center">
+          <div id="listing-card-div-flex">
             {listings.map((listing) => {
               if (!listing.archived)
                 return (
@@ -225,7 +227,7 @@ const Browse = () => {
         {mapOrList === "map" && (
           <div className="col-12 d-inline-grid justify-content-center">
             <div className="row">
-              <div className="col-8">
+              <div className="col-12">
                 <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
                   <GoogleMap
                     mapContainerStyle={containerStyle}
