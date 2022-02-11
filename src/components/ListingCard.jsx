@@ -93,11 +93,12 @@ const ListingCard = ({ listing }) => {
 
   return (
     <div
-      className="card my-3"
+      className="card my-3  p-3 m-3"
       style={{
         minWidth: "300px",
         maxWidth: "25vw",
         borderRadius: "10px",
+        backgroundColor: 	"#f2cc6f",
       }}
     >
       <img
@@ -106,22 +107,23 @@ const ListingCard = ({ listing }) => {
         src={listing.owner?.picture}
         alt={listing.name}
       />
-      <div className="card-body">
-        <p style={{ backgroundColor: tagColor, color: "white" }}>
+      <div className="card-body text-uppercase text-justify text-dark">
+        <p style={{ backgroundColor: tagColor, color: "white", borderRadius: "5px", padding: "2%" }}>
           {displayTag}
         </p>
-        <h5 className="card-title">{listing.name}</h5>
-        <h5 className="card-text">Price: {listing.price}€</h5>
-        <p className="card-text">{listing.owner?.name}</p>
-        <FontAwesomeIcon
+        <div className="row"><div className="col-8"><h5 className="card-title">{listing.name}</h5></div><div className="col-4"><h5 className="card-text" style={{color: "black"}}>{listing.price}€</h5></div></div>
+        <div className="row"><div className="col-8"><h6 className="card-text text-dark">{listing.owner?.name}</h6></div><div className="col-4"><FontAwesomeIcon
           style={{ cursor: "pointer" }}
           onClick={toggleFavorite}
           icon={favIcon}
-          size="xs"
-        />
-        <p className="card-text">Pick up by {moment(listing.owner?.endTimeSlot).format("ddd, hA")}</p>
+          size="s"
+          style={{color: "red"}}
+        /></div></div>
+        <hr></hr>
+        
+        <p className="card-text text-dark">Pick up by <span className="text-danger text-xl">{moment(listing.owner?.endTimeSlot).format("ddd, hA")}</span></p>
         <p>Available quantity : {listing.availableQuantity}</p>
-        <Link to={`/listing/${listing._id}`}>See this offer</Link>
+        <Link to={`/listing/${listing._id}`}>SEE</Link>
       </div>
     </div>
   );

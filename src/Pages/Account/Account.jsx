@@ -38,11 +38,13 @@ const Account = () => {
 
   return (
     <>
-      <h1>Welcome {user.name}</h1>
+    <div className="container-fluid" style={{backgroundColor: "#83092C", color: "slateblue"}}>
+      <h1>WELCOME {user.name}</h1>
+      
       {user.role === "user" && (
         // Render the view for buyers
         <>
-          <h3>My Bookings</h3>
+          <h3>YOUR BOOKINGS</h3>
 
           {!user.bookings && <p>You don't have any bookings for the moment</p>}
           {user.bookings &&
@@ -50,12 +52,26 @@ const Account = () => {
             user.bookings.map((booking) => {
               return (
                 <>
-                  <div className="card" style={{ width: "auto" }}>
+                  <div className="card my-3"
+      style={{
+        minWidth: "300px",
+        maxWidth: "95vw",
+        borderRadius: "10px",
+        backgroundColor: "silver",
+        alignSelf: "center"
+      }}>
+                 <div className="row">
+                 <div className="col-6 text-justify">
                     <img
-                      className="card-img-top"
+                      className="card-img-top text-center"
                       src={booking.listing?.owner?.picture}
                       alt={booking.listing?.name}
+                      style={{
+                        width: "auto"
+                      }}
                     />
+                    </div>
+                    <div className="col-4 flex-column">
                     <div className="card-body">
                       <h5 className="card-title">
                         Reserved quantity : {booking.quantity}
@@ -63,16 +79,19 @@ const Account = () => {
                       <h5 className="card-text">
                         Price: {booking.listing?.price * booking.quantity}€
                       </h5>
+                      
                       <p className="card-text">
                         {booking.listing?.owner?.address}
                       </p>
                       <p className="card-text">
                         Pick up by {moment(booking.listing.owner?.endTimeSlot).format("ddd, hA")}
                       </p>
+                      </div>
                       <Link to={`/account/bookings/${booking._id}`}>
                         See this booking
                       </Link>
                     </div>
+                  </div>
                   </div>
                 </>
               );
@@ -101,6 +120,7 @@ const Account = () => {
           )}
         </>
       )}
+      </div>
     </>
   );
 };

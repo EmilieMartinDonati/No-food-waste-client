@@ -12,16 +12,22 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-dark bg-dark px-5 py-3">
+   
+
+
+    <nav className="navbar navbar-secondary px-5 py-3 text-uppercase" style={{
+      backgroundColor: "#83092C"
+    }}>
       {!isLoggedIn && (
         <>
-          <NavLink className={"nav-link"} to="/">
+          <NavLink className={"topLink"} to="/"
+          >
             Home
           </NavLink>
-          <NavLink className={"nav-link"} to="/login">
+          <NavLink className={"topLink"} to="/login">
             Log in
           </NavLink>
-          <NavLink className={"nav-link"} to="/signup">
+          <NavLink className={"topLink"} to="/signup">
             Sign up
           </NavLink>
         </>
@@ -31,23 +37,23 @@ const Navbar = () => {
         <>
           {currentUser.role === "user" && (
             <>
-              <NavLink className={"nav-link"} to="/listings">
+              <NavLink className={"topLink"} to="/listings">
                 Search
               </NavLink>
-              <NavLink className={"nav-link"} to="/favorites">
+              <NavLink className={"topLink"} to="/favorites">
                 Favorites
               </NavLink>
             </>
           )}
           {currentUser.role === "business" && (
-            <NavLink className={"nav-link"} to="/dashboard">
+            <NavLink className={"topLink"} to="/dashboard">
               Dashboard
             </NavLink>
           )}
-          <NavLink className={"nav-link"} to="/account">
+          <NavLink className={"topLink"} to="/account">
             My account
           </NavLink>
-          <button className="btn btn-danger" onClick={handleClick}>
+          <button className="btn btn-secondary" onClick={handleClick}>
             Log out
           </button>
         </>

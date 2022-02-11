@@ -1,6 +1,13 @@
+/* @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700'); */
+
 .App {
   text-align: center;
+  /* font-family: "Quicksand", sans-serif; */
+    font-size: 80%;
+    font-size: 15px;
 }
+
+
 
 .App-logo {
   height: 40vmin;
@@ -58,4 +65,30 @@ button {
 
 .gray-listing {
   color: lightgray;
+}
+
+.topLink {
+  text-decoration: none !important;
+  color: white;
+}
+
+.topLink:hover {
+  color: white !important;
+}
+
+#buttonReview {
+  background-color: black;
+  opacity: 0.7em !important;
+  color: white
+  ;
+  font-weight: bold;
+}
+
+#buttonReview:hover {
+  color: purple
+  ;
+}
+
+.yo {
+  color: #f5bcc9
 }

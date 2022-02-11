@@ -152,10 +152,10 @@ const Browse = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid pt-3">
       <div className="row">
         <div className="col-12">
-          <h1 className="text-center text-danger">BROWSE</h1>
+          <h1 className="text-center text-bold" style={{color: "purple"}}>BROWSE</h1>
           <p>
             Offers near{" "}
             <span style={{ color: "slategrey" }}>{userAddress}</span>
@@ -170,7 +170,7 @@ const Browse = () => {
             {categories.map((category, i) => {
               return (
                 <button
-                  className="btn btn-active m-2 p-3"
+                  className="btn btn-active m-2 p-4 text-bold text-uppercase"
                   key={category._id}
                   value={category._id}
                   onClick={(e) => setSearch(e.target.value)}
@@ -180,15 +180,16 @@ const Browse = () => {
                 </button>
               );
             })}
-            <button>Search</button>
+            {/* <button>Search</button> */}
           </form>
         </div>
       </div>
 
-      <div className="row">
+      <div className="row inline-flex-center" style={{color: "silver"}}>
         <div className="col-6">
           <button
-            className="btn-info"
+            className="btn"
+            style={{color: "silver"}}
             value="list"
             onClick={(e) => setMapOrList(e.target.value)}
           >
@@ -197,8 +198,9 @@ const Browse = () => {
         </div>
         <div className="col-6">
           <button
-            className="btn-info"
+            className="btn btn-block"
             value="map"
+            style={{color: "silver"}}
             onClick={(e) => setMapOrList(e.target.value)}
           >
             MAP

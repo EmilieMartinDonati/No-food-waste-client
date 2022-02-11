@@ -75,10 +75,13 @@ const ListingDetails = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container-fluid">
+        <div className="row">
+        <div className="col-12">
+        <h1 className="mt-3 mb-3">LISTING DETAILS</h1>
+        </div>
         <div className="row">
           <div className="col-6">
-            <h1>Listing details</h1>
             {listing.name && <ListingCard listing={listing} />}
           </div>
 
@@ -137,6 +140,7 @@ const ListingDetails = () => {
                 </form>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>

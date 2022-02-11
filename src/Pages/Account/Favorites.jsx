@@ -12,6 +12,7 @@ const Favorites = () => {
 
     const [content, setContent] = useState("");
     const [favoriteId, setFavoriteId] = useState("");
+    // const [comments, setComments] = useState("");
 
 
     useEffect(() => {
@@ -19,14 +20,18 @@ const Favorites = () => {
             .then((res) => {
                 console.log(res.data)
                 setFavorites(res.data.favorites)
+                console.log("those are the favorites", favorites)
             })
             .catch((e) => console.log(e));
     }, [])
 
+    // Toggle the dropdown.
 
     const visibilityHandler = () => {
         elementRef.current.classList.toggle("collapse");
     }
+
+    // Allows to create a review.
 
     const reviewHandler = (e) => {
         e.preventDefault();
@@ -37,7 +42,14 @@ const Favorites = () => {
         }
         APIHandler.post("/api/review/create", data)
             .then((res) => {
-                console.log("this is what comes back from res data", res.data);
+                console.log("this is what comes back from res data", res.data._id);
+                setFavorites((prevValues) => {
+                    const filtered = prevValues.filter(elem => elem._id !== res.data._id);
+                    const newValue = res.data;
+                    const newArray = [...filtered, newValue];
+                    return newArray;
+                })
+
 
             })
             .catch((e) => console.log(e))
@@ -47,41 +59,71 @@ const Favorites = () => {
         setFavoriteId(id);
     }
 
-    const handleDelete = (reviewId) => {
-        APIHandler.delete(`/api/review/delete/${reviewId}`)
-        .then((dbRes) => console.log(dbRes.data))
-        .catch ((e) => console.log(e))
+    // Delete handler, trying to retrieve the business of the array.
+
+    const handleDelete = (e, reviewId, favorites) => {
+        console.log("this is the complete array normally", favorites);
+        console.log('this is the reviewId', reviewId);
+
+        let myIndex;
+
+        favorites.map((elem, index, array) => {
+            if (elem.reviews.find((elem) => elem._id === reviewId)) {
+                myIndex = index;
+            } else {
+                myIndex = 0
+            }
+        })
+        console.log(myIndex);
+
+        let businessId = favorites[myIndex]._id;
+        console.log(businessId);
+
+        APIHandler.delete(`/api/review/delete/${reviewId}/${businessId}`)
+            .then((dbRes) => {
+                console.log(dbRes.data);
+                setFavorites((prevValues) => {
+                    const filtered = prevValues.filter(elem => elem._id !== dbRes.data._id);
+                    console.log("pls get there", filtered)
+                    const newValue = dbRes.data;
+                    console.log("new value", newValue)
+                    const newArray = [...filtered, newValue];
+                    return newArray;
+                })
+            }
+            )
+            .catch((e) => console.log(e))
     }
 
     return (
         <>
-            <h3 className="text-danger text-uppercase">Your favorite restaurants</h3>
-            <div className="container">
-                <div className="row">
 
-                    {favorites.map((elem) => {
+            <div className="container-fluid pt-3 pb-3">
+                <h3 className="text-uppercase" style={{color: "white"}}>Your favorite restaurants</h3>
+                <div className="row pt-3">
+
+                    {favorites.map((elem, index, favorites) => {
                         return (
 
                             <>
-
-
                                 <div className="col-6">
-                                    <div className="card" style={{ width: "30rem" }}>
+                                    <div className="card" style={{ width: "auto", margin: "2%", borderRadius: "10px", color: "gray", backgroundColor: "black" }}>
                                         <img
-                                            className="card-img-top"
+                                            className="img-responsive"
                                             src={elem.picture}
                                             alt={elem.name}
+                                            style={{ borderRadius: "2%" }}
                                         />
                                         <div className="card-body">
-                                            <h5 className="card-title">{elem.name}</h5>
+                                            <h5 className="card-title text-uppercase" style={{ color: "purple" }}>{elem.name}</h5>
                                             <p className="card-text">{elem.description}</p>
                                             {elem.reviews && elem.reviews.map((review) => {
                                                 return (
-                                                    <div style={{ border: "2px solid blue", margin: "2rem" }}>
-                                                        <p>{review.content} by <span style={{ color: "slateblue" }}>{review.writer.name}</span></p>
+                                                    <div style={{color: "white", width: "auto", margin: "2rem", padding: "4em" }} className='d-inline-flex p-1 bg-dark'>
+                                                        <p>{review.content} by <span style={{ color: "slateblue" }}>{review.writer?.name}</span></p>
                                                         <span
                                                             style={{ cursor: "pointer" }}
-                                                            onClick={() => handleDelete(review._id)}
+                                                            onClick={(e) => handleDelete(e, review._id, favorites)}
                                                             className="col-sm p-4"
                                                         >
                                                             <TrashIcon size={24} />
@@ -97,18 +139,18 @@ const Favorites = () => {
                                 </div>
                                 <div className="col-6">
                                     <p>
-                                        <button onClick={visibilityHandler} className="btn btn-primary px-5 py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                            LEAVE A COMMENT FOR THIS BUSINESS
+                                        <button onClick={visibilityHandler} className="btn px-5 py-2" type="button" id="buttonReview" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                            LEAVE A REVIEW FOR THIS ENTERPRISE
                                         </button>
                                     </p>
-                                    <div className="collapse" id="collapseExample" ref={elementRef}>
-                                        <div className="card card-body">
+                                    <div className="collapse" id="collapseExample" style={{ backgroundColor: "black important!" }} ref={elementRef}>
+                                        <div className="card card-body" style={{ backgroundColor: "black" }}>
                                             <form className="p-4" onSubmit={reviewHandler} onChange={(e) => handleChange(e, elem._id)}>
                                                 <div className="form-group m-3">
                                                     <label htmlFor="comment" className="card-title"></label>
-                                                    <input type="text" id="comment" min="1" className="form-control-file" onChange={(e) => setContent(e.target.value)} />
+                                                    <input type="text" id="comment" min="1" className="form-control-file" style={{ width: "80%", height: "300px" }} onChange={(e) => setContent(e.target.value)} />
                                                 </div>
-                                                <button className="btn btn-primary px-5 py-2">POST COMMENT</button>
+                                                <button className="btn px-5 py-2" style={{ color: "purple", fontWeight: "bolder" }}>POST COMMENT</button>
                                             </form>
                                         </div>
                                     </div>

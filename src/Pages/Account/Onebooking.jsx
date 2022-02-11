@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import apiHandler from '../../API/APIHandler';
 import Geocode from "react-geocode";
-import { GoogleMap, LoadScript, LoadScriptNext } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, LoadScriptNext, Marker} from '@react-google-maps/api';
 import BookingCard from "../../components/BookingCard";
 
 Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
@@ -101,6 +101,12 @@ const OneBooking = () => {
                                 }
                                 zoom={20}
                             >
+                            <Marker
+                            position={{
+                              lat: coord?.lat || -34.397,
+                              lng: coord?.lng || 150.644,
+                            }}
+                          />
                             </GoogleMap>
                         </LoadScript>
                     </div>
