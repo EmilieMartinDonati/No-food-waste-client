@@ -98,7 +98,7 @@ const Favorites = () => {
     return (
         <>
 
-            <div className="container-fluid pt-3 pb-3">
+            <div className="container-fluid pt-3 pb-3 background">
                 <h3 className="text-uppercase" style={{color: "white"}}>Your favorite restaurants</h3>
                 <div className="row pt-3">
 
@@ -107,7 +107,7 @@ const Favorites = () => {
 
                             <>
                                 <div className="col-6">
-                                    <div className="card" style={{ width: "auto", margin: "2%", borderRadius: "10px", color: "gray", backgroundColor: "black" }}>
+                                    <div className="card" style={{ width: "auto", margin: "2%", borderRadius: "10px", color: "gray", backgroundColor: "#FF4646" }}>
                                         <img
                                             className="img-responsive"
                                             src={elem.picture}

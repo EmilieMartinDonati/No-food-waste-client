@@ -16,7 +16,7 @@ const Navbar = () => {
 
 
     <nav className="navbar navbar-secondary px-5 py-3 text-uppercase" style={{
-      backgroundColor: "#83092C"
+      backgroundColor: "#A50B5E"
     }}>
       {!isLoggedIn && (
         <>

@@ -75,7 +75,7 @@ const ListingDetails = () => {
 
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid background">
         <div className="row">
         <div className="col-12">
         <h1 className="mt-3 mb-3">LISTING DETAILS</h1>

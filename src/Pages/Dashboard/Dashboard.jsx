@@ -23,7 +23,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div>
+    <div className="background">
       {!businessOfCurrentUser && (
         <div>
           <p className="p-5">Vous n'avez pas encore de business enregistré</p>

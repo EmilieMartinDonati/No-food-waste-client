@@ -27,7 +27,7 @@ const ListingsList = ({ business, setBusiness }) => {
   };
 
   return (
-    <>
+    <div className="background">
       <img
         className="mt-5"
         style={{ width: 200 }}
@@ -95,7 +95,7 @@ const ListingsList = ({ business, setBusiness }) => {
       >
         Add a listing
       </button>
-    </>
+    </div>
   );
 };
 

@@ -152,7 +152,7 @@ const Browse = () => {
   };
 
   return (
-    <div className="container-fluid pt-3">
+    <div className="container-fluid pt-3 background">
       <div className="row">
         <div className="col-12">
           <h1 className="text-center text-bold" style={{color: "purple"}}>BROWSE</h1>

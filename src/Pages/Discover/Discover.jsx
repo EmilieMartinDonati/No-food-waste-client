@@ -117,7 +117,7 @@ const Discover = () => {
       >
       </GoogleMap>):  */}
 
-      <div className="container-fluid" style={{backgroundColor: "white"}}>
+      <div className="container-fluid background">
         <div className="row">
           <div className="col-4">
             <h1 className="text-center text-danger">Discover</h1>

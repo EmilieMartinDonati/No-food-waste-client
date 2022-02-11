@@ -38,13 +38,13 @@ const Account = () => {
 
   return (
     <>
-    <div className="container-fluid" style={{backgroundColor: "#83092C", color: "slateblue"}}>
+    <div className="container-fluid background">
       <h1>WELCOME {user.name}</h1>
       
       {user.role === "user" && (
         // Render the view for buyers
         <>
-          <h3>YOUR BOOKINGS</h3>
+        <h3>YOUR BOOKINGS</h3>
 
           {!user.bookings && <p>You don't have any bookings for the moment</p>}
           {user.bookings &&
