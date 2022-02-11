@@ -23,21 +23,30 @@ const AuthRole = ({ setRole }) => {
     <div>
       {!isLoggedIn && (
         <div id="cover-image-auth-role">
-          <h1 style={{ "font-size": "7rem", color: "white" }} className="py-5">
-            How will you help us stop wasting food?
-          </h1>
-          <button
-            className="btn btn-primary mx-4 px-3"
-            onClick={handleUserSubmit}
+          <div
+            className="d-flex-wrap row align-items-center"
+            style={{ height: "100%" }}
           >
-            I will buy food
-          </button>
-          <button
-            className="btn btn-primary mx-4 px-3"
-            onClick={handleBusinessSubmit}
-          >
-            I will sell food
-          </button>
+            <h1 style={{ "font-size": "7rem", color: "white" }}>
+              How will you help us stop wasting food?
+            </h1>
+            <div>
+              <button
+                className="btn btn-primary mx-4 px-5"
+                style={{ backgroundColor: "#FF4646", border: 0 }}
+                onClick={handleUserSubmit}
+              >
+                I will buy food
+              </button>
+              <button
+                className="btn btn-primary mx-4 px-5"
+                style={{ backgroundColor: "#FF4646", border: 0 }}
+                onClick={handleBusinessSubmit}
+              >
+                I will sell food
+              </button>
+            </div>
+          </div>
         </div>
       )}
       {isLoggedIn && currentUser.role === "user" && navigate("/discover")}

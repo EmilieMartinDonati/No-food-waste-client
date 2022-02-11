@@ -75,20 +75,33 @@ const ListingDetails = () => {
 
   return (
     <>
-      <div className="container-fluid background">
-        <div className="row">
-        <div className="col-12">
-        <h1 className="mt-3 mb-3">LISTING DETAILS</h1>
-        </div>
-        <div className="row">
-          <div className="col-6">
-            {listing.name && <ListingCard listing={listing} />}
+      <div className="background">
+        <div className="display-flex-column align-content-center justify-content-center">
+          <h1 className="p-5">LISTING DETAILS</h1>
+          <div className="display-flex">
+            <div id="listing-card-div-flex">
+              {listing.name && <ListingCard listing={listing} />}
+              <p>
+                <strong>GENERAL CONDITONS: </strong>Lorem ipsum dolor, sit amet
+                consectetur adipisicing elit. Nisi sunt, labore hic tempora aut
+                perferendis delectus nulla doloremque, totam excepturi, eaque
+                officiis veritatis ipsum dolor suscipit debitis? Dolorem, error
+                ea. Facilis, optio dignissimos possimus fugit reiciendis maiores
+                ipsum quia tempora eveniet! Recusandae unde nam reiciendis
+                facilis fuga numquam culpa enim ratione dignissimos sunt cumque
+                quas totam esse, omnis debitis sint. Asperiores quam rem dolor,
+                pariatur molestias excepturi omnis commodi, magnam saepe
+                architecto quidem. Deleniti modi beatae assumenda voluptates
+                esse mollitia iusto repellat, eum nam, optio perspiciatis,
+                facilis quibusdam sit maxime.
+              </p>
+            </div>
           </div>
-
-          <div className="col-6">
+          <div className="m-4">
             <button
               onClick={visibilityHandler}
               className="btn btn-primary px-5 py-2"
+              style={{ backgroundColor: "#FF4646", border: 0 }}
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapseExample"
@@ -98,7 +111,10 @@ const ListingDetails = () => {
               BOOK THIS MEAL
             </button>
             <div className="collapse" id="collapseExample" ref={elementRef}>
-              <div className="card card-body">
+              <div
+                className="card card-body"
+                style={{ backgroundColor: "#FFF5C0", border: 0 }}
+              >
                 <form onSubmit={submitHandler} className="p-4">
                   <div className="form-group m-3">
                     <label htmlFor="label" className="card-title">
@@ -133,14 +149,16 @@ const ListingDetails = () => {
                     name="buy-something"
                     amount={listing.price * 100}
                   >
-                    <button className="btn btn-primary px-5 py-2">
+                    <button
+                      className="btn btn-primary px-5 py-2"
+                      style={{ backgroundColor: "#FF4646", border: 0 }}
+                    >
                       ${listing.price}
                     </button>
                   </StripeCheckout>
                 </form>
               </div>
             </div>
-          </div>
           </div>
         </div>
       </div>

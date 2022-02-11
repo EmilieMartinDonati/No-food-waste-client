@@ -39,14 +39,18 @@ const Account = () => {
   return (
     <>
       <div className="container-fluid background">
-        <h1>WELCOME {user.name}</h1>
+        <h1 className="p-5" style={{ color: "#FF4646" }}>
+          WELCOME {user.name}
+        </h1>
 
         {user.role === "user" && (
           // Render the view for buyers
           <>
             <h3>YOUR BOOKINGS</h3>
 
-            {!user.bookings && <p>You don't have any bookings for the moment</p>}
+            {!user.bookings && (
+              <p>You don't have any bookings for the moment</p>
+            )}
             {user.bookings &&
               user.bookings.length > 0 &&
               user.bookings.map((booking) => {
@@ -116,13 +120,19 @@ const Account = () => {
             {!proBookings && <p>You don't have any bookings for the moment</p>}
             {proBookings && (
               <>
-                <p>Here are your bookings</p>
-                <div className="d-flex column">
+                <div className="d-inline-flex-wrap row justify-content-center">
                   {proBookings.map((booking) => (
-                    <div>
-                      <h3>{booking.buyer.name}</h3>
-                      <p>{booking.listing.name}</p>
-                      <p>{booking.quantity}</p>
+                    <div
+                      style={{
+                        width: "300px",
+                        border: "1px solid #FF8585",
+                        borderRadius: "20px",
+                      }}
+                      className="m-4 p-2"
+                    >
+                      <h3>Buyer: {booking.buyer.name}</h3>
+                      <p>Listing: {booking.listing.name}</p>
+                      <p>Quantity: {booking.quantity}</p>
                     </div>
                   ))}
                 </div>

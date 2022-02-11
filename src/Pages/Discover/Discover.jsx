@@ -48,35 +48,14 @@ const Discover = () => {
   );
 
   const containerStyle = {
-    width: "auto",
-    height: "400px",
+    width: "100vw",
+    height: "60vh",
   };
 
   const center = {
     lat: latitude,
     lng: longitude,
   };
-
-  // const { isLoaded } = useJsApiLoader({
-  //   id: 'google-map-script',
-  //   googleMapsApiKey: "AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk"
-  // })
-
-  // const [map, setMap] = useState(null);
-
-  //   const onLoad = useCallback(function callback(map) {
-  //     let isMounted = true;
-  //     if (isMounted) {
-  //     const bounds = new window.google.maps.LatLngBounds();
-  //     map.fitBounds(bounds);
-  //     setMap(map)
-  //     }
-  //     return () => { isMounted = false };
-  //   }, [])
-
-  //   const onUnmount = useCallback(function callback(map) {
-  //     setMap(null)
-  //   }, [])
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -90,42 +69,26 @@ const Discover = () => {
       console.log("Longitude is :", position.coords.longitude);
       setLongitude(position.coords.longitude);
     });
-    // let isMounted = true;
-    // if (isMounted) {
+
     APIHandler.get("/discover")
       .then((dbRes) => {
         console.log("this is db Res for allListings", dbRes);
         setAllListings(dbRes.data);
       })
       .catch((err) => console.error(err));
-    // }
-    // return () => {
-    //   isMounted = false;
-    // };
   }, []);
 
   return (
     <div>
-      {/* 
-      isLoaded ? (
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-      >
-      </GoogleMap>):  */}
-
-      <div className="container-fluid background">
-        <div className="row">
-          <div className="col-4">
+      <div className="background">
+        <div>
+          <div className="p-5">
             <h1 className="text-center text-danger">Discover</h1>
             <p>
               Offers near <span style={{ color: "slategrey" }}>{address}</span>
             </p>
           </div>
-          <div className="col-8">
+          <div className="pb-5" style={{ width: "80vw" }}>
             <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
               <GoogleMap
                 mapContainerStyle={containerStyle}
@@ -144,8 +107,8 @@ const Discover = () => {
         </div>
         <div className="row">
           <div className="col-12">
-            <h1 className="text-center text-danger">Our approach</h1>
-            <p>
+            <h1 className="text-center text-danger p-5">Our approach</h1>
+            <p className="pb-5">
               No-food-waste is an ecofriendly society that allows restaurant
               owners to sell their unsold stocks to you under the form of of
               nicely packaged meals.

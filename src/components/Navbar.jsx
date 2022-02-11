@@ -12,16 +12,15 @@ const Navbar = () => {
   };
 
   return (
-   
-
-
-    <nav className="navbar navbar-secondary px-5 py-3 text-uppercase" style={{
-      backgroundColor: "#A50B5E"
-    }}>
+    <nav
+      className="navbar navbar-secondary px-5 py-4 text-uppercase"
+      style={{
+        backgroundColor: "#FF4646",
+      }}
+    >
       {!isLoggedIn && (
         <>
-          <NavLink className={"topLink"} to="/"
-          >
+          <NavLink className={"topLink"} to="/">
             Home
           </NavLink>
           <NavLink className={"topLink"} to="/login">
@@ -53,7 +52,11 @@ const Navbar = () => {
           <NavLink className={"topLink"} to="/account">
             My account
           </NavLink>
-          <button className="btn btn-secondary" onClick={handleClick}>
+          <button
+            className="btn btn-secondary"
+            onClick={handleClick}
+            style={{ backgroundColor: "#FFB396", border: 0, color: "red" }}
+          >
             Log out
           </button>
         </>

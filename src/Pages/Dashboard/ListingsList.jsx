@@ -29,20 +29,21 @@ const ListingsList = ({ business, setBusiness }) => {
   return (
     <div className="background">
       <img
-        className="mt-5"
-        style={{ width: 200 }}
+        style={{ width: "100vw", maxHeight: "400px" }}
         src={business.picture}
         alt={business.name}
       />
-      <h1 className="p-5">{business.name}</h1>
+      <h1 className="p-5" style={{ color: "#FF4646  " }}>
+        {business.name}
+      </h1>
       {!business.listings.length && (
         <p>You don't have any listings for the moment</p>
       )}
       {business.listings.length > 0 && (
         <>
           <h2 className="p-3">My listings</h2>
-          <div className="container m-5">
-            <div className="row">
+          <div className="col-12 container m-5">
+            <div className="col-12 row">
               <strong className="col-sm p-4">Name</strong>
               <strong className="col-sm p-4">Price</strong>
               <strong className="col-sm p-4">Available quantity</strong>
@@ -51,9 +52,12 @@ const ListingsList = ({ business, setBusiness }) => {
               <strong className="col-sm p-4">Delete</strong>
               <strong className="col-sm p-4">Active</strong>
             </div>
+            <hr />
             {business.listings.map((listing) => (
               <div
-                className={listing.archived ? "row gray-listing" : "row"}
+                className={
+                  listing.archived ? "col-12 row gray-listing" : "col-12 row"
+                }
                 key={listing._id}
               >
                 <span className="col-sm p-4">{listing.name}</span>
@@ -74,7 +78,10 @@ const ListingsList = ({ business, setBusiness }) => {
                 >
                   <TrashIcon size={24} />
                 </span>
-                <span className="col-sm p-4">
+                <span
+                  style={{ color: listing.archived ? "red" : "green" }}
+                  className="col-sm p-4"
+                >
                   {listing.archived && <XCircleFillIcon size={24} />}
                   {!listing.archived && <CheckCircleFillIcon size={24} />}
                   {/* {!listing.archived && listing.owner.endTimeSlot &&<CheckCircleFillIcon size={24} />} */}
@@ -87,6 +94,7 @@ const ListingsList = ({ business, setBusiness }) => {
 
       <button
         className="btn btn-primary px-5 py-2"
+        style={{ backgroundColor: "#FF4646", border: 0 }}
         onClick={() =>
           navigate("/listings/create", {
             state: { businessId: business._id },

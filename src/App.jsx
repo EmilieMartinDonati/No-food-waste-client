@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import { useState } from "react";
 import Navbar from "./components/Navbar";
@@ -33,13 +34,10 @@ function App() {
         <Route path="/" element={<AuthRole setRole={setRole} />} />
         <Route path="/signup" element={<AuthSignup role={role} />} />
         <Route path="/login" element={<AuthSignin role={role} />} />
-        {/* <Route path="/testTimeSlot" element={<TimeSlots />} /> */}
         <Route element={<PrivateRoute />}>
           <Route path="/discover" element={<Discover />} />
-          {/* <Route path="/category" /> */}
           <Route path="/account" element={<Account />} />
           <Route path="/account/bookings/:id" element={<OneBooking />} />
-          {/* <Route path="/account/bookings/delete/:id" /> */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/listings/create" element={<CreateListing />} />
