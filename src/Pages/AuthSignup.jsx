@@ -40,18 +40,30 @@ const AuthSignup = ({ role }) => {
   };
 
   return (
-    <>
+    <div className="background">
       <h2 className="pt-5">Create an account</h2>
       <form onSubmit={handleSubmit} onChange={handleChange} className="pb-5">
         <div className="form-group p-5">
           <label className="m-3" htmlFor="name">
             NAME
           </label>
-          <input className="form-control" type="text" id="name" required />
+          <input
+            className="form-control"
+            type="text"
+            id="name"
+            placeholder="John doe"
+            required
+          />
           <label className="m-3" htmlFor="email">
             EMAIL
           </label>
-          <input className="form-control" type="text" id="email" required />
+          <input
+            className="form-control"
+            type="text"
+            id="email"
+            placeholder="john@doe.com"
+            required
+          />
           <label className="m-3" htmlFor="password">
             PASSWORD
           </label>
@@ -59,6 +71,7 @@ const AuthSignup = ({ role }) => {
             className="form-control"
             type="password"
             id="password"
+            placeholder="*********"
             required
           />
         </div>
@@ -72,7 +85,7 @@ const AuthSignup = ({ role }) => {
       <NavLink to="/login" role={role}>
         <h3>Already registered ? Log in</h3>
       </NavLink>
-    </>
+    </div>
   );
 };
 

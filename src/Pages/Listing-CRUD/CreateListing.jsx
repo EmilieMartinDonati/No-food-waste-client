@@ -32,7 +32,7 @@ const CreateListing = () => {
   };
 
   return (
-    <form className="p-4">
+    <form className="p-4 background">
       <h2 className="mx-3">Your listing's info</h2>
 
       <div className="form-group m-3">

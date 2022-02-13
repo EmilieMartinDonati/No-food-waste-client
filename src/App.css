@@ -55,6 +55,21 @@ button {
   height: 100vh;
 }
 
+#transparent-black-screen {
+  background-color: rgba(3, 3, 3, 0.6);
+  width: min(100vw, 100%);
+  height: 100vh;
+}
+
+#cover-page-title {
+  font-size: 7rem;
+  color: white;
+}
+
+@media (max-width: 375px) {
+  /* font-size: 30px; */
+}
+
 #listing-card-div-flex {
   display: flex;
   justify-content: center;

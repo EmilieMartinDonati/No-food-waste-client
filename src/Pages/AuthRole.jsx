@@ -23,28 +23,30 @@ const AuthRole = ({ setRole }) => {
     <div>
       {!isLoggedIn && (
         <div id="cover-image-auth-role">
-          <div
-            className="d-flex-wrap row align-items-center"
-            style={{ height: "100%" }}
-          >
-            <h1 style={{ "font-size": "7rem", color: "white" }}>
-              How will you help us stop wasting food?
-            </h1>
-            <div>
-              <button
-                className="btn btn-primary mx-4 px-5"
-                style={{ backgroundColor: "#FF4646", border: 0 }}
-                onClick={handleUserSubmit}
-              >
-                I will buy food
-              </button>
-              <button
-                className="btn btn-primary mx-4 px-5"
-                style={{ backgroundColor: "#FF4646", border: 0 }}
-                onClick={handleBusinessSubmit}
-              >
-                I will sell food
-              </button>
+          <div id="transparent-black-screen">
+            <div
+              className="d-flex-wrap row align-items-center"
+              style={{ height: "100%" }}
+            >
+              <h1 id="cover-page-title">
+                How will you help us stop wasting food?
+              </h1>
+              <div>
+                <button
+                  className="btn btn-primary mx-4 px-5"
+                  style={{ backgroundColor: "#FF4646", border: 0 }}
+                  onClick={handleUserSubmit}
+                >
+                  I will buy food
+                </button>
+                <button
+                  className="btn btn-primary mx-4 px-5"
+                  style={{ backgroundColor: "#FF4646", border: 0 }}
+                  onClick={handleBusinessSubmit}
+                >
+                  I will sell food
+                </button>
+              </div>
             </div>
           </div>
         </div>

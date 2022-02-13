@@ -38,7 +38,7 @@ const Account = () => {
 
   return (
     <>
-      <div className="container-fluid background">
+      <div className="background p-5">
         <h1 className="p-5" style={{ color: "#FF4646" }}>
           WELCOME {user.name}
         </h1>
@@ -57,47 +57,59 @@ const Account = () => {
                 return (
                   <>
                     <div className="d-inline-flex">
-                      <div className="card my-3"
+                      <div
+                        className="card my-3"
                         style={{
                           maxWidth: "50vw",
                           borderRadius: "10px",
                           backgroundColor: "#FFB396",
-                        }}>
+                        }}
+                      >
                         <div className="row">
-                        <h5 className="card-title text-uppercase" style={{color: "#FF4646"}}>
-                                <span>{booking.listing.name}</span>
-                              </h5>
-                              <hr></hr>
+                          <h5
+                            className="card-title text-uppercase"
+                            style={{ color: "#FF4646" }}
+                          >
+                            <span>{booking.listing.name}</span>
+                          </h5>
+                          <hr></hr>
                           <div className="col-6 text-justify">
                             <img
                               className="img-responsive text-center"
-                              src={booking.listing?.owner?.picture}
+                              src={booking.listing?.owner?.pinncture}
                               alt={booking.listing?.name}
                               style={{
                                 position: "relative",
                                 borderRadius: "10px",
+                                width: "250px",
                               }}
                             />
                           </div>
                           <div className="col-6">
                             <div className="card-body">
-                            <div className="d-inline-flex text-uppercase m-3">
-                            <div>
-                              <h5 className="card-title">
-                                QUANTITY:  <span>{booking.quantity}  </span>
-                              </h5>
-                              </div>
-                              <hr></hr>
-                              <h5 className="card-text">
-                                Price:  <span className="text-danger">{booking.listing?.price * booking.quantity}€</span>
-                              </h5>
+                              <div className="d-inline-flex text-uppercase m-3">
+                                <div>
+                                  <h5 className="card-title">
+                                    QUANTITY: <span>{booking.quantity} </span>
+                                  </h5>
+                                </div>
+                                <hr></hr>
+                                <h5 className="card-text">
+                                  Price:{" "}
+                                  <span className="text-danger">
+                                    {booking.listing?.price * booking.quantity}€
+                                  </span>
+                                </h5>
                               </div>
 
                               <p className="card-text">
                                 {booking.listing?.owner?.address}
                               </p>
                               <p className="card-text">
-                                Pick up by {moment(booking.listing.owner?.endTimeSlot).format("ddd, hA")}
+                                Pick up by{" "}
+                                {moment(
+                                  booking.listing.owner?.endTimeSlot
+                                ).format("ddd, hA")}
                               </p>
                             </div>
                             <Link to={`/account/bookings/${booking._id}`}>

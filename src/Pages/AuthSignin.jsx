@@ -35,7 +35,7 @@ const AuthSignin = ({ role }) => {
   };
 
   return (
-    <>
+    <div className="background">
       <h1 className="pt-5">Sign in</h1>
       <form className="pb-5" onSubmit={handleSubmit}>
         <div className="form-group p-5">
@@ -46,6 +46,7 @@ const AuthSignin = ({ role }) => {
             className="form-control"
             type="text"
             name="email"
+            placeholder="john@doe.com"
             required
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -56,6 +57,7 @@ const AuthSignin = ({ role }) => {
             className="form-control"
             type="password"
             name="password"
+            placeholder="*********"
             required
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -67,7 +69,7 @@ const AuthSignin = ({ role }) => {
           LOG IN
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

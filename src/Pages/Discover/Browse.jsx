@@ -93,17 +93,14 @@ const Browse = () => {
 
   const handleAll = () => {
     try {
-      apiHandler
-        .get("/listings")
-        .then((res) => {
-          console.log("this is the res from the db line 77", res.data.businesses);
-          setListings(res.data.listings);
-        })
+      apiHandler.get("/listings").then((res) => {
+        console.log("this is the res from the db line 77", res.data.businesses);
+        setListings(res.data.listings);
+      });
+    } catch (e) {
+      next(e);
     }
-    catch (e) {
-      next(e)
-    }
-  }
+  };
 
   useEffect(() => {
     initLocalisations();
@@ -209,10 +206,15 @@ const Browse = () => {
                 </button>
               );
             })}
-            <button className="btn btn-active m-2 p-5 text-bold text-uppercase" style={{
-              backgroundColor:
-                "#FFB396"
-            }} onClick={handleAll}>All</button>
+            <button
+              className="btn btn-active m-2 p-5 text-bold text-uppercase"
+              style={{
+                backgroundColor: "#FFB396",
+              }}
+              onClick={handleAll}
+            >
+              All
+            </button>
           </form>
         </div>
       </div>
@@ -273,7 +275,13 @@ const Browse = () => {
                               lat: listing.coord?.lat || -34.397,
                               lng: listing.coord?.lng || 150.644,
                             }}
-                            onClick={(e) => handleMarkerClick(e, listing._id, listing.owner._id)}
+                            onClick={(e) =>
+                              handleMarkerClick(
+                                e,
+                                listing._id,
+                                listing.owner._id
+                              )
+                            }
                           />
                         </form>
                       );
@@ -282,11 +290,10 @@ const Browse = () => {
                 </LoadScript>
               </div>
               <div className="col-4">
-                {Object.entries(listingMap).length > 0 > 0 && (
+                {Object.entries(listingMap).length > 0 > 0 &&
                   listingMap.map((listing) => {
-                    return (<ListingCard listing={listing} />)
-                  })
-                )}
+                    return <ListingCard listing={listing} />;
+                  })}
               </div>
             </div>
           </div>

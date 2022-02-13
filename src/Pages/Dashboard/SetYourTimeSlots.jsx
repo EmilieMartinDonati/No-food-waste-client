@@ -62,7 +62,11 @@ const SetYourTimeSlots = ({ business }) => {
         onChange={(evt) => handleEndTimeChange(evt)}
       />
 
-      <button className="btn btn-primary" onClick={(evt) => handleClick(evt)}>
+      <button
+        className="btn btn-primary mx-4 px-5"
+        style={{ backgroundColor: "#FF4646", border: 0 }}
+        onClick={(evt) => handleClick(evt)}
+      >
         Register timeslots
       </button>
     </form>

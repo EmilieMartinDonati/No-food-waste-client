@@ -99,6 +99,7 @@ const Discover = () => {
           </div>
         </div>
         <div className="d-flex-wrap justify-content-center">
+          <h1 className="text-center text-danger pt-5">Our current listings</h1>
           <div id="listing-card-div-flex">
             {allListings.map((listing) => {
               if (!listing.archived) return <ListingCard listing={listing} />;
