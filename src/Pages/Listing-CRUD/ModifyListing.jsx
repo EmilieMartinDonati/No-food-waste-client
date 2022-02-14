@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import apiHandler from "../../API/APIHandler";
 import Switch from "react-switch";
+import S from "react-switch";
+const Switch = S.default? S.default: S
+console.log(S); // inspecting
 
 const ModifyListing = () => {
   const [name, setName] = useState("");
