@@ -52,8 +52,8 @@ const Account = () => {
               <p>You don't have any bookings for the moment</p>
             )}
             {user.bookings &&
-              user.bookings.length > 0 &&
-              user.bookings.map((booking) => {
+              user.bookings?.length > 0 &&
+              user.bookings?.map((booking) => {
                 return (
                   <>
                     <div className="d-inline-flex">
@@ -61,63 +61,44 @@ const Account = () => {
                         className="card my-3"
                         style={{
                           maxWidth: "50vw",
+                          height: "auto",
                           borderRadius: "10px",
-                          backgroundColor: "#FFB396",
+                          backgroundColor: "#fff5c0",
                         }}
                       >
-                        <div className="row">
-                          <h5
-                            className="card-title text-uppercase"
-                            style={{ color: "#FF4646" }}
-                          >
-                            <span>{booking.listing.name}</span>
-                          </h5>
-                          <hr></hr>
-                          <div className="col-6 text-justify">
-                            <img
-                              className="img-responsive text-center"
-                              src={booking.listing?.owner?.pinncture}
-                              alt={booking.listing?.name}
-                              style={{
-                                position: "relative",
-                                borderRadius: "10px",
-                                width: "250px",
-                              }}
-                            />
-                          </div>
-                          <div className="col-6">
-                            <div className="card-body">
-                              <div className="d-inline-flex text-uppercase m-3">
-                                <div>
-                                  <h5 className="card-title">
-                                    QUANTITY: <span>{booking.quantity} </span>
-                                  </h5>
-                                </div>
-                                <hr></hr>
-                                <h5 className="card-text">
-                                  Price:{" "}
-                                  <span className="text-danger">
-                                    {booking.listing?.price * booking.quantity}€
-                                  </span>
-                                </h5>
-                              </div>
 
-                              <p className="card-text">
-                                {booking.listing?.owner?.address}
-                              </p>
-                              <p className="card-text">
-                                Pick up by{" "}
-                                {moment(
-                                  booking.listing.owner?.endTimeSlot
-                                ).format("ddd, hA")}
-                              </p>
-                            </div>
-                            <Link to={`/account/bookings/${booking._id}`}>
+              <div className="card background" style={{ width: "30rem", backgroundColor: "#fff5c0", height: "100vh" }}>
+                <img
+                    className="card-img-top"
+                    src={booking?.listing?.owner?.picture}
+                    alt={booking?.listing?.name}
+                />
+                <div className="card-body">
+                    <div className="row">
+                        <div className="col-6">
+                            <h5 className="card-title">Reserved quantity : {booking?.quantity}</h5>
+                        </div>
+                        <div className="col-6">
+                            <h5 className="card-text">Price: {booking?.listing?.price * booking?.quantity}€</h5>
+                        </div>
+                        <hr></hr>
+                    </div>
+                    <div className="row">
+                        <div className="col-6">
+                            <p className="card-text">{booking?.listing?.owner?.address}</p>
+                        </div>
+                        <div className="col-6">
+                            <p className="card-text">Pick up by {moment(booking?.listing?.owner?.endTimeSlot).format("ddd, hA")}</p>
+                        </div>
+                    </div>
+                    <div className="row">
+                    <Link to={`/account/bookings/${booking._id}`}>
                               See this booking
                             </Link>
-                          </div>
-                        </div>
-                      </div>
+                            </div>
+                            </div>
+                    </div>
+                    </div>
                     </div>
                   </>
                 );
@@ -142,9 +123,9 @@ const Account = () => {
                       }}
                       className="m-4 p-2"
                     >
-                      <h3>Buyer: {booking.buyer.name}</h3>
-                      <p>Listing: {booking.listing.name}</p>
-                      <p>Quantity: {booking.quantity}</p>
+                      <h3>Buyer: {booking?.buyer?.name}</h3>
+                      <p>Listing: {booking?.listing?.name}</p>
+                      <p>Quantity: {booking?.quantity}</p>
                     </div>
                   ))}
                 </div>

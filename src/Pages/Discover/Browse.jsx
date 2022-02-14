@@ -209,7 +209,7 @@ const Browse = () => {
             <button
               className="btn btn-active m-2 p-5 text-bold text-uppercase"
               style={{
-                backgroundColor: "#FFB396",
+                backgroundColor: "#ff4646",
               }}
               onClick={handleAll}
             >
@@ -290,7 +290,7 @@ const Browse = () => {
                 </LoadScript>
               </div>
               <div className="col-4">
-                {Object.entries(listingMap).length > 0 > 0 &&
+                {Object.entries(listingMap).length > 0 &&
                   listingMap.map((listing) => {
                     return <ListingCard listing={listing} />;
                   })}

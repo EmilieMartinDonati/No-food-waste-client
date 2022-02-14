@@ -107,7 +107,7 @@ const Favorites = () => {
 
                             <>
                                 <div className="col-6">
-                                    <div className="card" style={{ width: "auto", margin: "2%", borderRadius: "10px", color: "#FFF5C0", backgroundColor: "#E97171" }}>
+                                    <div className="card" style={{ width: "auto", margin: "2%", borderRadius: "10px", color: "#E97171", backgroundColor: "#FFF5C0" }}>
                                         <img
                                             className="img-responsive"
                                             src={elem.picture}
@@ -115,7 +115,7 @@ const Favorites = () => {
                                             style={{ borderRadius: "2%" }}
                                         />
                                         <div className="card-body">
-                                            <h5 className="card-title text-uppercase" style={{ color: "#FFF5C0" }}>{elem.name}</h5>
+                                            <h5 className="card-title text-uppercase" style={{ color: "#E97171" }}>{elem.name}</h5>
                                             <p className="card-text">{elem.description}</p>
                                             {elem.reviews && elem.reviews.map((review) => {
                                                 return (
