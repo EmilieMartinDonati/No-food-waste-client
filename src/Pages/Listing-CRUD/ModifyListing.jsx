@@ -5,11 +5,11 @@ import Switch from "react-switch";
 
 const ModifyListing = () => {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [availableQuantity, setAvailableQuantity] = useState("");
+  const [price, setPrice] = useState(0);
+  const [availableQuantity, setAvailableQuantity] = useState(0);
   const [description, setDescription] = useState("");
-  const [recurring, setRecurring] = useState("");
-  const [archived, setArchived] = useState("");
+  const [recurring, setRecurring] = useState(false);
+  const [archived, setArchived] = useState(false);
 
   const navigate = useNavigate();
   const { listingId } = useParams();
@@ -18,6 +18,13 @@ const ModifyListing = () => {
     apiHandler
       .get(`/api/listings/${listingId}`)
       .then((dbResponse) => {
+        console.log(typeof dbResponse.data.name);
+        console.log(typeof dbResponse.data.availableQuantity);
+        console.log(typeof dbResponse.data.price);
+        console.log(typeof dbResponse.data.description);
+        console.log(typeof dbResponse.data.recurring);
+        console.log(typeof dbResponse.data.archived);
+
         // setListing(dbResponse.data);
         setName(dbResponse.data.name);
         setPrice(dbResponse.data.price);

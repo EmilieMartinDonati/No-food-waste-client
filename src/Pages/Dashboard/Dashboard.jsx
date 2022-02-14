@@ -14,6 +14,7 @@ const Dashboard = () => {
     apiHandler
       .get("/api/business")
       .then((allBusinesses) => {
+        console.log("this is all businesses from db");
         return allBusinesses.data.find(
           (business) => business.owner === currentUser._id
         );
