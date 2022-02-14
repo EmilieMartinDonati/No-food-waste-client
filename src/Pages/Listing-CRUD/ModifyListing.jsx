@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import apiHandler from "../../API/APIHandler";
-import Switch from "react-switch";
+// import Switch from "react-switch";
 import Switch from 'react-switch/dist/react-switch.dev.js';
 
 const ModifyListing = () => {
