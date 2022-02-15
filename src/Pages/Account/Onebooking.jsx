@@ -20,7 +20,7 @@ const OneBooking = () => {
   const [coord, setCoord] = useState({});
 
   const containerStyle = {
-    width: "auto",
+    maxWidth: "auto",
     height: "100vh",
     className: "container-fluid",
   };
@@ -72,13 +72,13 @@ const OneBooking = () => {
   }
 
   return (
-    <div className="container p-5 background">
+    <div className="container background">
       {booking && (
         <div className="row">
-          <div className="col-6 m-2">
+          <div className="col-5 m-2">
             <BookingCard booking={booking} />
           </div>
-          <div className="col-6 m-2">
+          <div className="col-5">
             <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
               <GoogleMap
                 mapContainerStyle={containerStyle}

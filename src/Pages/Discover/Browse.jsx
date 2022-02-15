@@ -4,6 +4,7 @@ import ListingCard from "../../components/ListingCard";
 import { NavLink } from "react-router-dom";
 import Geocode from "react-geocode";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
 Geocode.setLanguage("fr");
@@ -19,6 +20,7 @@ const Browse = () => {
   const [mapOrList, setMapOrList] = useState("list");
   const [listingMap, setListingMap] = useState([]);
   const [businesses, setBusinesses] = useState([]);
+  const [clicked, setClicked] = useState(15);
 
   // Fetch all businesses, filter par catégories, display their listings.
 
@@ -157,6 +159,7 @@ const Browse = () => {
     const data = {
       search: search,
     };
+
     console.log("this is the console line 141", data);
     apiHandler
       .post("/category", data)
@@ -171,6 +174,12 @@ const Browse = () => {
       })
       .catch((e) => console.log(e));
   };
+
+  const handleClick = (e, i) => {
+    console.log(i);
+    setClicked(i);
+    setSearch(e);
+  }
 
   return (
     <div className="container-fluid pt-3 background">
@@ -194,27 +203,46 @@ const Browse = () => {
           <form onSubmit={handleSearch}>
             <label htmlFor="search"></label>
             {categories.map((category, i) => {
+              if (clicked !== i)
               return (
                 <button
                   className="btn btn-active m-2 p-4 text-bold text-uppercase"
                   key={category._id}
                   value={category._id}
-                  onClick={(e) => setSearch(e.target.value)}
-                  style={{ backgroundColor: category.color }}
+                  onClick={(e) => handleClick(e.target.value, i)}
+                  // onClick={(e) => setClicked(i)}
+                  style={{ 
+                    backgroundColor: category.color}}
                 >
                   {category.name}
                 </button>
-              );
+              )
+              else return (
+                <button
+                  className="btn btn-active m-2 p-5 text-bold text-uppercase"
+                  key={category._id}
+                  value={category._id}
+                  onClick={(e, i) => handleClick(e.target.value, i)}
+                  // onClick={(e) => setClicked(i)}
+                  style={{ 
+                    color: category.color,
+                    border: `${category.color} solid 3px`}}
+                >
+                  {category.name}
+                </button>
+              )
             })}
             <button
-              className="btn btn-active m-2 p-5 text-bold text-uppercase"
+              className="btn btn-active m-2 p-5 text-bold text-uppercase rounded"
               style={{
                 backgroundColor: "#ff4646",
+                color: "white",
+                border: "5px solid rgb(255, 201, 161)"
               }}
               onClick={handleAll}
-            >
-              All
+            >ALL
             </button>
+            <FontAwesomeIcon icon="fa-solid fa-arrow-rotate-left" style={{color: "red"}}/>
           </form>
         </div>
       </div>

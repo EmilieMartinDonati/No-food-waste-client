@@ -37,16 +37,17 @@ const Account = () => {
   }, []);
 
   return (
-    <>
-      <div className="background p-5">
-        <h1 className="p-5" style={{ color: "#FF4646" }}>
-          WELCOME {user.name}
-        </h1>
+    <div className="background p-5">
+      <h1 className="p-5" style={{ color: "#FF4646" }}>
+        WELCOME {user.name}
+      </h1>
 
-        {user.role === "user" && (
-          // Render the view for buyers
-          <>
-            <h3>YOUR BOOKINGS</h3>
+      {user.role === "user" && (
+        // Render the view for buyers
+        <>
+          <h3>YOUR BOOKINGS</h3>
+
+          <div className="d-inline-flex">
 
             {!user.bookings && (
               <p>You don't have any bookings for the moment</p>
@@ -56,85 +57,78 @@ const Account = () => {
               user.bookings?.map((booking) => {
                 return (
                   <>
-                    <div className="d-inline-flex">
-                      <div
-                        className="card my-3"
-                        style={{
-                          maxWidth: "50vw",
-                          height: "auto",
-                          borderRadius: "10px",
-                          backgroundColor: "#fff5c0",
-                        }}
-                      >
 
-              <div className="card background" style={{ width: "30rem", backgroundColor: "#fff5c0", height: "100vh" }}>
-                <img
-                    className="card-img-top"
-                    src={booking?.listing?.owner?.picture}
-                    alt={booking?.listing?.name}
-                />
-                <div className="card-body">
-                    <div className="row">
-                        <div className="col-6">
-                            <h5 className="card-title">Reserved quantity : {booking?.quantity}</h5>
-                        </div>
-                        <div className="col-6">
-                            <h5 className="card-text">Price: {booking?.listing?.price * booking?.quantity}€</h5>
-                        </div>
-                        <hr></hr>
-                    </div>
-                    <div className="row">
-                        <div className="col-6">
-                            <p className="card-text">{booking?.listing?.owner?.address}</p>
-                        </div>
-                        <div className="col-6">
-                            <p className="card-text">Pick up by {moment(booking?.listing?.owner?.endTimeSlot).format("ddd, hA")}</p>
-                        </div>
-                    </div>
-                    <div className="row">
-                    <Link to={`/account/bookings/${booking._id}`}>
+                      <div className="card background m-5" style={{ width: "30rem", backgroundColor: "rgb(255, 172, 141)", height: "auto" }}>
+                        <img
+                          className="card-img-top"
+                          src={booking?.listing?.owner?.picture}
+                          alt={booking?.listing?.name}
+                          style={{objectFit: "cover",
+                          width: "100%",
+                          height: "600px"}}
+                        />
+                        <div className="card-body">
+                          <div className="row">
+                            <div className="col-8">
+                              <h5 className="card-title text-uppercase">Reserved quantity : {booking?.quantity}</h5>
+                            </div>
+                            <div className="col-4">
+                              <h5 className="card-text text-uppercase text-danger">{booking?.listing?.price * booking?.quantity}€</h5>
+                            </div>
+                            <hr></hr>
+                          </div>
+                          <div className="row">
+                            <div className="col-6">
+                              <p className="card-text">{booking?.listing?.owner?.address}</p>
+                            </div>
+                            <div className="col-6">
+                              <p className="card-text">Pick up by {moment(booking?.listing?.owner?.endTimeSlot).format("ddd, hA")}</p>
+                            </div>
+                          </div>
+                          <hr></hr>
+                          <div className="row text-uppercase">
+                            <Link to={`/account/bookings/${booking._id}`} style={{color: "red", textDecoration: "none"}}>
                               See this booking
                             </Link>
-                            </div>
-                            </div>
-                    </div>
-                    </div>
-                    </div>
+                          </div>
+                        </div>
+                      </div>
+                    {/* </div> */}
                   </>
                 );
               })}
-          </>
-        )}
+          </div>
+        </>
+      )}
 
-        {user.role === "business" && (
-          // Render the view for pros
-          <>
-            <h3>My Bookings</h3>
-            {!proBookings && <p>You don't have any bookings for the moment</p>}
-            {proBookings && (
-              <>
-                <div className="d-inline-flex-wrap row justify-content-center">
-                  {proBookings.map((booking) => (
-                    <div
-                      style={{
-                        width: "300px",
-                        border: "1px solid #FF8585",
-                        borderRadius: "20px",
-                      }}
-                      className="m-4 p-2"
-                    >
-                      <h3>Buyer: {booking?.buyer?.name}</h3>
-                      <p>Listing: {booking?.listing?.name}</p>
-                      <p>Quantity: {booking?.quantity}</p>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </>
-        )}
-      </div>
-    </>
+      {user.role === "business" && (
+        // Render the view for pros
+        <>
+          <h3>My Bookings</h3>
+          {!proBookings && <p>You don't have any bookings for the moment</p>}
+          {proBookings && (
+            <>
+              <div className="d-inline-flex-wrap row justify-content-center">
+                {proBookings.map((booking) => (
+                  <div
+                    style={{
+                      width: "300px",
+                      border: "1px solid #FF8585",
+                      borderRadius: "20px",
+                    }}
+                    className="m-4 p-2"
+                  >
+                    <h3>Buyer: {booking?.buyer?.name}</h3>
+                    <p>Listing: {booking?.listing?.name}</p>
+                    <p>Quantity: {booking?.quantity}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </>
+      )}
+    </div>
   );
 };
 

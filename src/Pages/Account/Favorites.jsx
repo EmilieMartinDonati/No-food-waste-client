@@ -99,7 +99,7 @@ const Favorites = () => {
         <>
 
             <div className="container-fluid pt-3 pb-3 background">
-                <h3 className="text-uppercase" style={{ color: "#FFF5C0" }}>Your favorite restaurants</h3>
+                {/* <h3 className="text-uppercase" style={{ color: "red" }}>Your favorite restaurants</h3> */}
                 <div className="row pt-3">
 
                     {favorites.map((elem, index, favorites) => {
@@ -107,15 +107,15 @@ const Favorites = () => {
 
                             <>
                                 <div className="col-6">
-                                    <div className="card" style={{ width: "auto", margin: "2%", borderRadius: "10px", color: "#E97171", backgroundColor: "#FFF5C0" }}>
+                                    <div className="card" style={{ width: "auto", margin: "2%", borderRadius: "10px", color: "red", backgroundColor: "rgb(255, 172, 141)" }}>
                                         <img
-                                            className="img-responsive"
+                                            className="img-card-top p-5"
                                             src={elem.picture}
                                             alt={elem.name}
-                                            style={{ borderRadius: "2%" }}
+                                            style={{ borderRadius: "5%", height: 600 }}
                                         />
                                         <div className="card-body">
-                                            <h5 className="card-title text-uppercase" style={{ color: "#E97171" }}>{elem.name}</h5>
+                                            <h5 className="card-title text-uppercase" style={{ color: "red" }}>{elem.name}</h5>
                                             <p className="card-text">{elem.description}</p>
                                             {elem.reviews && elem.reviews.map((review) => {
                                                 return (
@@ -139,16 +139,16 @@ const Favorites = () => {
                                 </div>
                                 <div className="col-6">
                                     <p>
-                                        <button onClick={visibilityHandler} className="btn px-5 py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style={{backgroundColor: "#FF4646", color: "#FFB396"}}>
+                                        <button onClick={visibilityHandler} className="btn px-5 py-2 bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style={{color: "silver"}}>
                                             LEAVE A REVIEW FOR THIS ENTERPRISE
                                         </button>
                                     </p>
-                                    <div className="collapse" id="collapseExample" style={{ backgroundColor: "#fff5c0" }} ref={elementRef}>
-                                        <div className="card card-body" style={{ backgroundColor: "#fff5c0" }}>
+                                    <div className="collapse rounded" id="collapseExample" ref={elementRef}>
+                                        <div className="card card-body rounded">
                                             <form className="p-4" onSubmit={reviewHandler} onChange={(e) => handleChange(e, elem._id)}>
                                                 <div className="form-group m-3">
                                                     <label htmlFor="comment" className="card-title"></label>
-                                                    <input type="text" id="comment" min="1" className="form-control-file" style={{ width: "80%", height: "300px" }} onChange={(e) => setContent(e.target.value)} />
+                                                    <input type="text" id="comment" min="1" className="form-control-file" style={{ width: "80%", height: "300px", backgroundColor: "rgb(255, 172, 141)" }} onChange={(e) => setContent(e.target.value)} />
                                                 </div>
                                                 <button className="btn px-5 py-2" style={{ color: "#FF4646", fontWeight: "bolder" }}>POST COMMENT</button>
                                             </form>

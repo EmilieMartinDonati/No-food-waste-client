@@ -19,12 +19,6 @@ const ModifyListing = () => {
     apiHandler
       .get(`/api/listings/${listingId}`)
       .then((dbResponse) => {
-        console.log(typeof dbResponse.data.name);
-        console.log(typeof dbResponse.data.availableQuantity);
-        console.log(typeof dbResponse.data.price);
-        console.log(typeof dbResponse.data.description);
-        console.log(typeof dbResponse.data.recurring);
-        console.log(typeof dbResponse.data.archived);
 
         // setListing(dbResponse.data);
         setName(dbResponse.data.name);
