@@ -67,7 +67,7 @@ const DescribeYourProducts = ({ setBusiness, setStep }) => {
         </select>
       </div>
 
-      <button className="btn btn-primary" onClick={(evt) => handleClick(evt)}>
+      <button className="btn" onClick={(evt) => handleClick(evt)} style={{backgroundColor: "rgb(255, 70, 70)"}}>
         Ok
       </button>
     </form>

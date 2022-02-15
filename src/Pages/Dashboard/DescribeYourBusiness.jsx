@@ -25,13 +25,14 @@ const DescribeYourBusiness = ({ setBusiness, setStep }) => {
 
   return (
     <form className="p-4">
-      <h2>Describe your business</h2>
+      <h2 className="text-uppercase">Describe your business</h2>
       <p>
         Please tell us a little bit more about your business so that we can
         settle your account
       </p>
+      <hr></hr>
 
-      <h3>Confirm the name and location of your business</h3>
+      {/* <h3>Confirm the name and location of your business</h3> */}
 
       <div className="form-group m-3">
         <input
@@ -73,10 +74,17 @@ const DescribeYourBusiness = ({ setBusiness, setStep }) => {
         />
       </div>
 
-      <p>
+      <div className="container">
+      <div className="row mt-3 mb-5">
+      <div className="col-6">
+
+      <p style={{textAlign: "justify !important"}}>
         You can also provide a picture for your business. While not mandatory,
         it will help users differentiating your listings with others.
       </p>
+      </div>
+
+      <div className="col-6">
 
       <div className="form-group m-3">
         <input
@@ -85,11 +93,18 @@ const DescribeYourBusiness = ({ setBusiness, setStep }) => {
           type="file"
           name="picture"
         />
+        </div>
+      </div>
+      </div>
       </div>
 
       <button
-        className="btn btn-primary px-5 py-2"
+        className="btn px-5 py-2"
         onClick={(evt) => handleClick(evt)}
+        style={{
+          backgroundColor: "rgb(255, 70, 70)",
+          color: "white"
+        }}
       >
         Register
       </button>

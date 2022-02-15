@@ -112,7 +112,7 @@ const Favorites = () => {
                                             className="img-card-top p-5"
                                             src={elem.picture}
                                             alt={elem.name}
-                                            style={{ borderRadius: "5%", height: 600 }}
+                                            style={{ borderRadius: "5%", maxHeight: "400px" }}
                                         />
                                         <div className="card-body">
                                             <h5 className="card-title text-uppercase" style={{ color: "red" }}>{elem.name}</h5>

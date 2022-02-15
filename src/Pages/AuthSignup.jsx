@@ -41,7 +41,7 @@ const AuthSignup = ({ role }) => {
 
   return (
     <div className="background">
-      <h2 className="pt-5">Create an account</h2>
+      <h2 className="pt-5 text-uppercase">Create an account</h2>
       <form onSubmit={handleSubmit} onChange={handleChange} className="pb-5">
         <div className="form-group p-5">
           <label className="m-3" htmlFor="name">
@@ -82,8 +82,8 @@ const AuthSignup = ({ role }) => {
           SIGN UP
         </button>
       </form>
-      <NavLink to="/login" role={role}>
-        <h3>Already registered ? Log in</h3>
+      <NavLink to="/login" role={role} style={{color: "black", textDecoration: "none"}}>
+        <h3 className="text-uppercase">Already registered ? Log in</h3>
       </NavLink>
     </div>
   );

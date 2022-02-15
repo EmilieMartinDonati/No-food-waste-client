@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import apiHandler from "../../api/apiHandler";
 import ListingCard from "../../components/ListingCard";
 import { NavLink } from "react-router-dom";
@@ -10,6 +10,8 @@ Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
 Geocode.setLanguage("fr");
 
 const Browse = () => {
+
+  const elementRef = useRef();
   // this is for the user.
   const [latitudeUser, setLatitudeUser] = useState(0);
   const [longitudeUser, setLongitudeUser] = useState(0);
@@ -98,6 +100,9 @@ const Browse = () => {
       apiHandler.get("/listings").then((res) => {
         console.log("this is the res from the db line 77", res.data.businesses);
         setListings(res.data.listings);
+        elementRef.current.classList.add("bg-white");
+        elementRef.current.style.color("black");
+
       });
     } catch (e) {
       next(e);
@@ -236,10 +241,11 @@ const Browse = () => {
               className="btn btn-active m-2 p-5 text-bold text-uppercase rounded"
               style={{
                 backgroundColor: "#ff4646",
-                color: "white",
+                color: "silver",
                 border: "5px solid rgb(255, 201, 161)"
               }}
               onClick={handleAll}
+              ref={elementRef}
             >ALL
             </button>
             <FontAwesomeIcon icon="fa-solid fa-arrow-rotate-left" style={{color: "red"}}/>
