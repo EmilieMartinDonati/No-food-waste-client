@@ -29,7 +29,7 @@ const ListingsList = ({ business, setBusiness }) => {
   return (
     <div className="background">
       <img
-        style={{ width: "100vw", maxHeight: "400px" }}
+        style={{ width: "100vw", maxHeight: "800px" }}
         src={business.picture}
         alt={business.name}
       />

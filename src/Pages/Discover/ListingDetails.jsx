@@ -113,7 +113,7 @@ const ListingDetails = () => {
             <div className="collapse" id="collapseExample" ref={elementRef}>
               <div
                 className="card card-body"
-                style={{ backgroundColor: "#FFF5C0", border: 0 }}
+                style={{ border: 0 }}
               >
                 <form onSubmit={submitHandler} className="p-4">
                   <div className="form-group m-3">
