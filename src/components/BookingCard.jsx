@@ -22,7 +22,7 @@ const BookingCard = ({ booking }) => {
     return (
         <>
             <div className="row">
-                <div className="card background" style={{ width: "auto", backgroundColor: "rgb(255, 172, 141)"}}>
+                <div className="card background" style={{ width: "auto", backgroundColor: "#FFF5C0"}}>
                     <img
                         className="card-img-top"
                         src={booking.listing?.owner?.picture}

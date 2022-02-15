@@ -99,7 +99,7 @@ const ListingCard = ({ listing }) => {
         borderRadius: "10px",
         // border: "1px solid #FF4646",
         borderShadow: "10px",
-        backgroundColor: "rgb(255, 172, 141)",
+        backgroundColor: "#FFF5C0",
       }}
     >
       <div style={{ position: "relative" }}>

@@ -58,7 +58,7 @@ const Account = () => {
                 return (
                   <>
 
-                      <div className="card background m-5" style={{ width: "30rem", backgroundColor: "rgb(255, 172, 141)", height: "auto" }}>
+                      <div className="card background m-5" style={{ width: "30rem", backgroundColor: "#FFF5C0", height: "auto" }}>
                         <img
                           className="card-img-top"
                           src={booking?.listing?.owner?.picture}
