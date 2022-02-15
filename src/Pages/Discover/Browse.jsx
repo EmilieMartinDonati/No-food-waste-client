@@ -6,7 +6,8 @@ import Geocode from "react-geocode";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
+// Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
+Geocode.setApiKey("AIzaSyDWzuqTOkhvuqiZA4eoKNn3SFBF1-e0hao");
 Geocode.setLanguage("fr");
 
 const Browse = () => {
@@ -294,7 +295,8 @@ const Browse = () => {
           <div className="col-12 d-inline-grid justify-content-center">
             <div className="row">
               <div className="col-8">
-                <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
+                {/* <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk"> */}
+                <LoadScript googleMapsApiKey="AIzaSyDWzuqTOkhvuqiZA4eoKNn3SFBF1-e0hao">
                   <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={center}

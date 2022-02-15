@@ -5,7 +5,8 @@ import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import Geocode from "react-geocode";
 import APIHandler from "../../API/APIHandler";
 
-Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
+// Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
+Geocode.setApiKey("AIzaSyDWzuqTOkhvuqiZA4eoKNn3SFBF1-e0hao");
 Geocode.setLanguage("fr");
 
 const Discover = () => {
@@ -89,7 +90,8 @@ const Discover = () => {
             </p>
           </div>
           <div className="pb-5" style={{ width: "80vw" }}>
-            <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
+            {/* <LoadScript googleMaps="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk"> */}
+            <LoadScript googleMapsApiKey="AIzaSyDWzuqTOkhvuqiZA4eoKNn3SFBF1-e0hao">
               <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}

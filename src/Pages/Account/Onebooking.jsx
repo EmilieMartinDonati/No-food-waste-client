@@ -9,7 +9,8 @@ import {
   Marker,
 } from "@react-google-maps/api";
 import BookingCard from "../../components/BookingCard";
-Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
+// Geocode.setApiKey("AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk");
+Geocode.setApiKey("AIzaSyDWzuqTOkhvuqiZA4eoKNn3SFBF1-e0hao");
 Geocode.setLanguage("fr");
 
 const OneBooking = () => {
@@ -79,7 +80,8 @@ const OneBooking = () => {
             <BookingCard booking={booking} />
           </div>
           <div className="col-5">
-            <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk">
+            {/* <LoadScript googleMapsApiKey="AIzaSyAWNUhMz1o6js88esl8_xmRkQgFOZr38nk"> */}
+            <LoadScript googleMapsApiKey="AIzaSyDWzuqTOkhvuqiZA4eoKNn3SFBF1-e0hao">
               <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={{
