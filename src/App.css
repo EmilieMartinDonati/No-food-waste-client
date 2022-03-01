@@ -67,7 +67,9 @@ button {
 }
 
 @media (max-width: 375px) {
-  /* font-size: 30px; */
+  #cover-page-title {
+    font-size: 30px;
+  }
 }
 
 #listing-card-div-flex {
